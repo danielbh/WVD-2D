@@ -19,6 +19,13 @@ namespace UnityTest
 			actionController.Received(1).Fire ();
 		}
 
+		[Test]
+		public void TheDpadStillWorksIfPlayerMovesFingerOutsideOfDpadAfterPressingButDoesNotRemoveItFromTheScreen() {
+			//Press down on Dpad up
+			// Figure is moved outisde of Dpad Sprite
+			// Assert Dpad is still being pressed
+		}
+
 		private IPlayerActionController GetActionControllerMock () {
 			return Substitute.For<IPlayerActionController> ();
 		}

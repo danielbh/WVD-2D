@@ -12,19 +12,19 @@ namespace UnityTest
 			this.playerActionController = playerActionController;
 		}
 
-		void Fire() {
+		private void Fire() {
 			playerActionController.Fire ();
 		}
 
-		void Move () {
+		private void Move () {
 			playerActionController.Move ();
 		}
 
-		bool FireButtonBeingTouched() {
+		private bool FireButtonBeingTouched() {
 			return playerActionController.FireButtonBeingTouched();
 		}
 
-		bool DirectionButtonBeingTouched () {
+		private bool DirectionButtonBeingTouched () {
 			return playerActionController.DirectionButtonBeingTouched();
 		}
 
