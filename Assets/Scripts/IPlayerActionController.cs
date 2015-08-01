@@ -6,7 +6,9 @@ namespace UnityTest
 	{
 		void Fire();
 		void Move ();
-		bool FireButtonBeingTouched ();
-		bool DirectionButtonBeingTouched ();
+		float GetMoveH ();
+		float GetMoveV ();
+		float GetFireAimH ();
+		float GetFireAimV ();
 	}
 }
