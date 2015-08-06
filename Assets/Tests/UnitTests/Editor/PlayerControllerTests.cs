@@ -1,38 +1,47 @@
-﻿using NSubstitute;
+﻿using UnityEngine;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace UnityTest
 {
 	public class PlayerControllerTests
 	{
+
 		[Test]
-		public void PlayerFireCalled() {
+		public void InitialFireDirectionIsAsExpected() {
 
 			var actionController = GetActionControllerMock();
-			var humbleMock = GetPlayerHumbleControllerMock(actionController);
+			var playerMock = GetPlayerHumbleControllerMock(actionController);
 
-			humbleMock.HandleJoystickInput();
-
-			//actionController.Received(1).Fire ();
+			Assert.That(playerMock.initialFireDirection == Vector3.right);
 		}
 
 		[Test]
-		public void PlayerMoveCalled() {
-			var actionController = GetActionControllerMock();
-			var humbleMock = GetPlayerHumbleControllerMock(actionController);
+		public void FiringSetToTrueAndFalseWhenAppropriate() {
+			var playerMock = GetPlayerHumbleControllerMock(Substitute.For<IPlayerActionController> ());
 
-			humbleMock.HandleJoystickInput();
-		
-			actionController.Received(1).Move ();
+			playerMock.StartFiring();
+			Assert.That(playerMock.firing == true);
+			playerMock.StopFiring();
+			Assert.That(playerMock.firing == false);
 		}
 
-		[Test]
-		public void PlayerMovesDesignatedAmount() {
-			var actionController = GetActionControllerMock();
-
-			actionController.GetMoveH().Returns (1);
-			actionController.GetMoveV().Returns (1);		}
-
+//
+//		[Test]
+//		public void PlayerMoveCalled() {
+//			var actionController = GetActionControllerMock();
+//			var humbleMock = GetPlayerHumbleControllerMock(actionController);
+//					
+//			actionController.Received(1).Move ();
+//		}
+//
+//		[Test]
+//		public void PlayerMovesDesignatedAmount() {
+//			var actionController = GetActionControllerMock();
+//
+//			actionController.GetMoveH().Returns (1);
+//			actionController.GetMoveV().Returns (1);		}
+//
 		private IPlayerActionController GetActionControllerMock () {
 			return Substitute.For<IPlayerActionController> ();
 		}

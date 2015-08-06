@@ -245,6 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104e67cab102d6d469f26337d0339726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  humbleController:
+    firing: 0
   movementJoystick: {fileID: 1410167130}
   fireAimJoystick: {fileID: 1974599853}
   staff: {fileID: 1744427121}
@@ -253,7 +255,7 @@ MonoBehaviour:
   projectile: {fileID: 122682, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
   moveSpeed: 2
   firingRate: .200000003
-  turnSpeed: 50
+  turnSpeed: 100
   fireDirection: {x: 0, y: 0, z: 0}
 --- !u!212 &375258151
 SpriteRenderer:
@@ -605,7 +607,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1410167128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.05774307, y: -2.5, z: 0}
+  m_LocalPosition: {x: -8.44767475, y: -2.5, z: 0}
   m_LocalScale: {x: 1.79999995, y: 1.79999995, z: 1}
   m_Children:
   - {fileID: 479123230}
@@ -907,7 +909,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1974599851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.05774307, y: -2.5, z: 0}
+  m_LocalPosition: {x: 8.44767475, y: -2.5, z: 0}
   m_LocalScale: {x: 1.79999995, y: 1.79999995, z: 1}
   m_Children:
   - {fileID: 1761835369}
