@@ -25,6 +25,5 @@ namespace UnityTest
 		public void HandleJoystickInput() {
 			Move ();
 		}
-
 	}
 }

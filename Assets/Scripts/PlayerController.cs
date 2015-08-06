@@ -18,9 +18,11 @@ namespace UnityTest
 		public float projectileSpeed = 8;
 		public GameObject projectile;
 		public float moveSpeed= 2 ;
-		public float firingRate= 1;
-		public float turnSpeed = 1;
+		public float firingRate= 0.2f;
+		public float turnSpeed = 50;
 		public Vector3 fireDirection;
+
+		private bool firing = false;
 
 		// Use this for initialization
 		void OnEnable () {
@@ -29,7 +31,7 @@ namespace UnityTest
 			fireAimJoystick.FingerLiftedEvent += StopFiring;
 
 			// Set initial direction being faced
-			FaceDirection(Vector3.right, transform.position);
+			FaceDirection(Vector3.right);
 		}
 
 		void OnDisable() {
@@ -43,45 +45,40 @@ namespace UnityTest
 		
 		private void StartFiring() {
 			InvokeRepeating ("Fire", 0.00001f, firingRate);
+			firing = true;
 		}
 		
 		private void StopFiring() {
 			CancelInvoke("Fire");
+			firing = false;
 		}
 		
 		#region IPlayerActionController implementation
 		
 		public void Fire () {
-			GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject;
+
+			// Second condition: Makes sure that last fire direction is persisted if a new one isn't entered when stationary firing
+			if (firing == true && GetFireAimH() != 0 && GetFireAimV() != 0) {
+				// FIXME: Turns choppy needs to be made smooth.
+				FaceDirection (new Vector3(GetFireAimH(), GetFireAimV()));
+			} 
+
 			// Convert to unit vector so projectiles are all going the same speed.
 			fireDirection.Normalize();
+
+			GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject;
 			beam.GetComponent<Rigidbody2D>().velocity = new Vector3(fireDirection.x * projectileSpeed , fireDirection.y * projectileSpeed,0);
-			print (beam.GetComponent<Rigidbody2D>().velocity);
 		}
 		
 		public void Move() {
-			float h = GetMoveH(), v = GetMoveV();
-
 			var currentPosition = transform.position;
+			Vector3 moveDirection = new Vector2(GetMoveH(),  GetMoveV());
+			Vector3 target = moveDirection * moveSpeed + currentPosition;
 
-			var rigidbody2D = GetComponent<Rigidbody2D>();
-			
-			// Apply horizontal velocity
-			if (Mathf.Abs(h) > 0) {
-				rigidbody2D.velocity = new Vector2(h * moveSpeed,  rigidbody2D.velocity.y);
-				FaceDirection (rigidbody2D.velocity, currentPosition);
-			}
+			transform.position = Vector3.Lerp (currentPosition, target, Time.deltaTime);
 
-			// Apply vertical velocity
-			if (Mathf.Abs(v) > 0) {
-				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, v * moveSpeed);
-				FaceDirection(rigidbody2D.velocity, currentPosition);
-			}
-
-			// Used to reset movement of player when there is no input.
-			// TODO: is there a better way?
-			if (h == 0 ||  v == 0) {
-				rigidbody2D.velocity = new Vector2(0,0);
+			if (moveDirection != Vector3.zero && firing != true) {
+				FaceDirection (moveDirection);
 			}
 		}
 		
@@ -102,12 +99,12 @@ namespace UnityTest
 		}
 		#endregion
 		
-		public void FaceDirection(Vector3 moveToward, Vector3 currentPosition) {
+		public void FaceDirection(Vector3 faceDirection) {
 
-			fireDirection = moveToward;
-
+			fireDirection = faceDirection;
+		
 			//  Find the angle needed to turn to face new direction player is moving.
-			float targetAngle = Mathf.Atan2(moveToward.y, moveToward.x) * Mathf.Rad2Deg;
+			float targetAngle = Mathf.Atan2(faceDirection.y, faceDirection.x) * Mathf.Rad2Deg;
 
 			// Rotate player in new direction
 			arrow.transform.rotation = 

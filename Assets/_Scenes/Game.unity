@@ -252,8 +252,8 @@ MonoBehaviour:
   projectileSpeed: 8
   projectile: {fileID: 122682, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
   moveSpeed: 2
-  firingRate: 1
-  turnSpeed: 5
+  firingRate: .200000003
+  turnSpeed: 50
   fireDirection: {x: 0, y: 0, z: 0}
 --- !u!212 &375258151
 SpriteRenderer:
