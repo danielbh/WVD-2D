@@ -11,14 +11,16 @@ namespace UnityTest
 		public PlayerHumbleController humbleController;
 		public CNJoystick movementJoystick;
 		public CNJoystick fireAimJoystick;
-		
-		public float projectileSpeed = 10;
+
+		public GameObject staff;
+		public GameObject arrow;
+
+		public float projectileSpeed = 8;
 		public GameObject projectile;
-		public float moveSpeed= 1 ;
+		public float moveSpeed= 2 ;
 		public float firingRate= 1;
 		public float turnSpeed = 1;
-
-		private GameObject arrow;
+		public Vector3 fireDirection;
 
 		// Use this for initialization
 		void OnEnable () {
@@ -26,7 +28,13 @@ namespace UnityTest
 			fireAimJoystick.FingerTouchedEvent += StartFiring;
 			fireAimJoystick.FingerLiftedEvent += StopFiring;
 
-			arrow = GameObject.Find ("arrow");
+			// Set initial direction being faced
+			FaceDirection(Vector3.right, transform.position);
+		}
+
+		void OnDisable() {
+			fireAimJoystick.FingerTouchedEvent -= StartFiring;
+			fireAimJoystick.FingerLiftedEvent -= StopFiring;
 		}
 		
 		void Update () {
@@ -44,9 +52,11 @@ namespace UnityTest
 		#region IPlayerActionController implementation
 		
 		public void Fire () {
-			Vector3 offset = new Vector3(0, 1, 0);
-			GameObject beam = Instantiate(projectile, transform.position+offset, Quaternion.identity) as GameObject;
-			beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0, projectileSpeed, 0);
+			GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject;
+			// Convert to unit vector so projectiles are all going the same speed.
+			fireDirection.Normalize();
+			beam.GetComponent<Rigidbody2D>().velocity = new Vector3(fireDirection.x * projectileSpeed , fireDirection.y * projectileSpeed,0);
+			print (beam.GetComponent<Rigidbody2D>().velocity);
 		}
 		
 		public void Move() {
@@ -93,6 +103,8 @@ namespace UnityTest
 		#endregion
 		
 		public void FaceDirection(Vector3 moveToward, Vector3 currentPosition) {
+
+			fireDirection = moveToward;
 
 			//  Find the angle needed to turn to face new direction player is moving.
 			float targetAngle = Mathf.Atan2(moveToward.y, moveToward.x) * Mathf.Rad2Deg;
