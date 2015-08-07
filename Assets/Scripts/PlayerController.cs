@@ -6,74 +6,66 @@ using System;
 [Serializable]
 public class PlayerController {
 	
-	public IFiringController firingController;
-	public IMovingController movingController;
-	public bool firing = false;
+	public IFireAimController fireAimController;
+	public IMovementController movementController;
 	public Vector3 fireDirection;
-	
 	public readonly Vector3 initialFireDirection = Vector3.right;
 	
-	public void SetFiringController (IFiringController controller) {
-		firingController = controller;
+	public void SetFireAimController (IFireAimController controller) {
+		fireAimController = controller;
 	}
 	
-	public void SetMovingController (IMovingController controller) {
-		movingController = controller;
+	public void SetMovementController (IMovementController controller) {
+		movementController = controller;
 	}
 	
 	public void ApplyFire() {
-		
-		// Second condition: Makes sure that last fire direction is persisted if a new one isn't entered when stationary firing
-		if (firing == true && GetFireAimH() != 0 && GetFireAimV() != 0) { // TODO: Check conditions
+		//Makes sure that last fire direction is persisted if a new one isn't entered when stationary firing
+		if (!FireAimJoystickNeutral()) { 
 			// FIXME: Turns choppy needs to be made smooth.
-			movingController.FaceDirection (new Vector3(GetFireAimH(), GetFireAimV())); // TODO: Test function call
+			movementController.FaceDirection (new Vector3(GetFireAimH(), GetFireAimV())); 
 		} 
 		
 		// Convert to unit vector so projectiles are all going the same speed.
-		fireDirection.Normalize(); // TODO: Test normalized
-		firingController.Fire();
+		fireDirection.Normalize(); 
+		fireAimController.Fire();
 	}
 	
-	public void IsFiring() { 
-		if (firing == true) {
-			firing = false;
-		}
-		firing = true;
-	}
+	public bool FireAimJoystickNeutral() { return GetFireAimH() == 0 && GetFireAimV() == 0; }
 	
 	public float GetMoveH() {
-		return movingController.GetMoveH(); // TODO: Mock and test
+		return movementController.GetMoveH(); 
 	}
 	
 	public float GetMoveV() {
-		return movingController.GetMoveV(); // TODO: Mock and test
+		return movementController.GetMoveV(); 
 	}
 	
 	public float GetFireAimH() {
-		return firingController.GetFireAimH(); // TODO: Mock and test
+		return fireAimController.GetFireAimH(); 
 	}
 	
 	public float GetFireAimV() {
-		return firingController.GetFireAimV(); // TODO: Mock and test
+		return fireAimController.GetFireAimV(); 
 	}
 	
 	public Vector3 CalculateVelocity(float speed) {
-		return  new Vector3(fireDirection.x * speed , fireDirection.y * speed,0); // TODO: Test velocity set correctly
+		return  new Vector3(fireDirection.x * speed , fireDirection.y * speed,0); 
 	}
 	
 	public Vector3 Move (Vector3 currentPosition, float hAxis, float vAxis, float moveSpeed) {
 		Vector3 moveDirection = new Vector2(hAxis,  vAxis);
 		Vector3 target = moveDirection * moveSpeed + currentPosition;
 		
-		if (moveDirection != Vector3.zero && firing != true) { // TODO: Test conditions
-			movingController.FaceDirection (moveDirection); // TODO: Test called AND function gives right output
+		if (moveDirection != Vector3.zero && FireAimJoystickNeutral() == true) { 
+			movementController.FaceDirection (moveDirection); 
 		}
 		
 		// New position
-		return Vector3.Lerp (currentPosition, target, Time.deltaTime); // TODO: Test move position is now correct
+		return Vector3.Lerp (currentPosition, target, Time.deltaTime); 
 	}
 	
-	public Quaternion FaceDirection(Vector3 newDirection, Quaternion oldOrientation, float turnSpeed) { // TODO: Test input and output
+	public Quaternion FaceDirection(Vector3 newDirection, Quaternion oldOrientation, float turnSpeed) { 
 		
 		fireDirection = newDirection;
 		

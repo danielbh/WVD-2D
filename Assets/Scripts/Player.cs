@@ -3,8 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-
-public class Player : MonoBehaviour, IFiringController, IMovingController {
+public class Player : MonoBehaviour, IFireAimController, IMovementController {
 	
 	public PlayerController controller;
 	public CNJoystick movementJoystick;
@@ -22,8 +21,8 @@ public class Player : MonoBehaviour, IFiringController, IMovingController {
 
 	// Use this for initialization
 	public void OnEnable () {
-		controller.SetFiringController (this);
-		controller.SetMovingController (this);
+		controller.SetFireAimController (this);
+		controller.SetMovementController (this);
 		fireAimJoystick.FingerTouchedEvent += StartFiring;
 		fireAimJoystick.FingerLiftedEvent += StopFiring;
 		
@@ -46,12 +45,10 @@ public class Player : MonoBehaviour, IFiringController, IMovingController {
 	
 	public void StartFiring() {
 		StartCoroutine ("FiringSequence"); 
-		controller.IsFiring(); 
 	}
 	
 	public void StopFiring() {
 		StopCoroutine("FiringSequence");
-		controller.IsFiring();
 	}
 	
 	// Easier to test with Coroutine
@@ -64,19 +61,19 @@ public class Player : MonoBehaviour, IFiringController, IMovingController {
 		}
 	}
 	
-	#region IFiringController implementation
+	#region IFireAimController implementation
 	
 	public void Fire () {
 		GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject; 
-		beam.GetComponent<Rigidbody2D>().velocity = controller.CalculateVelocity(projectileSpeed);
+		beam.GetComponent<Rigidbody2D>().velocity = controller.CalculateVelocity(projectileSpeed); // FIXME: Taste a bit like spaghetti code here recalling a method on controller. is this avoidable?
 	}
 	
 	public float GetFireAimH() {
-		return fireAimJoystick.GetAxis("Horizontal");  // TODO: Mock and test
+		return fireAimJoystick.GetAxis("Horizontal"); 
 	}
 	
 	public float GetFireAimV() {
-		return fireAimJoystick.GetAxis("Vertical");  // TODO: Mock and test
+		return fireAimJoystick.GetAxis("Vertical");
 	}
 	
 	#endregion
@@ -84,15 +81,15 @@ public class Player : MonoBehaviour, IFiringController, IMovingController {
 	#region IMovementController implementation
 	
 	public float GetMoveH() {
-		return movementJoystick.GetAxis("Horizontal"); // TODO: Mock and test
+		return movementJoystick.GetAxis("Horizontal"); 
 	}
 	
 	public float GetMoveV() {
-		return movementJoystick.GetAxis("Vertical"); // TODO: Mock and test
+		return movementJoystick.GetAxis("Vertical"); 
 	}
 	
 	// FIXME: I had to sacrifice clarity here so I could make FaceDirection testable.
-	public void FaceDirection(Vector3 newDirection) { // TODO: Test input and output
+	public void FaceDirection(Vector3 newDirection) { 
 		arrow.transform.rotation = controller.FaceDirection (newDirection, arrow.transform.rotation, turnSpeed);
 	}
 	

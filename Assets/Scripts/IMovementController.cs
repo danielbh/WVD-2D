@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IMovingController {
-	//void Move (Vector3 newPos);
+public interface IMovementController {
 	float GetMoveH ();
 	float GetMoveV ();
 	void FaceDirection(Vector3 direction);
