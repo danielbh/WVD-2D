@@ -25,9 +25,6 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 		controller.SetMovementController (this);
 		fireAimJoystick.FingerTouchedEvent += StartFiring;
 		fireAimJoystick.FingerLiftedEvent += StopFiring;
-		
-		// Set initial direction being faced
-		FaceDirection(controller.initialFireDirection);
 	}
 	
 	void OnDisable() {
@@ -36,10 +33,10 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 	}
 	
 	void Update () {
-		float h = GetMoveH(), v = GetMoveV();
+		float h = movementJoystick.GetAxis("Horizontal"), v = movementJoystick.GetAxis("Vertical");
 		
 		if (h != 0 || v != 0) {
-			transform.position = controller.Move(transform.position, h, v, moveSpeed);
+			transform.position = controller.Move(transform.position, new Vector2(h, v), moveSpeed, arrow.transform.rotation, turnSpeed);
 		}
 	}
 	
@@ -56,41 +53,27 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 		yield return new WaitForSeconds(0.00001f);
 		
 		for (;;) {
-			controller.ApplyFire();
+			controller.ApplyFire(arrow.transform.rotation, turnSpeed);
 			yield return new WaitForSeconds(firingRate);
 		}
 	}
 	
 	#region IFireAimController implementation
 	
-	public void Fire () {
+	public void Fire (Vector3 direction) {
 		GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject; 
-		beam.GetComponent<Rigidbody2D>().velocity = controller.CalculateVelocity(projectileSpeed); // FIXME: Taste a bit like spaghetti code here recalling a method on controller. is this avoidable?
+		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x * projectileSpeed , direction.y * projectileSpeed,0); 
 	}
 	
-	public float GetFireAimH() {
-		return fireAimJoystick.GetAxis("Horizontal"); 
+	public Vector3 GetFireAimAxes() {
+		return new Vector3(fireAimJoystick.GetAxis("Horizontal"), fireAimJoystick.GetAxis("Vertical"), 0);
 	}
-	
-	public float GetFireAimV() {
-		return fireAimJoystick.GetAxis("Vertical");
-	}
-	
+
 	#endregion
 	
 	#region IMovementController implementation
-	
-	public float GetMoveH() {
-		return movementJoystick.GetAxis("Horizontal"); 
-	}
-	
-	public float GetMoveV() {
-		return movementJoystick.GetAxis("Vertical"); 
-	}
-	
-	// FIXME: I had to sacrifice clarity here so I could make FaceDirection testable.
-	public void FaceDirection(Vector3 newDirection) { 
-		arrow.transform.rotation = controller.FaceDirection (newDirection, arrow.transform.rotation, turnSpeed);
+	public void FaceDirection(Quaternion newDirection) { 
+		arrow.transform.rotation = newDirection;
 	}
 	
 	#endregion	

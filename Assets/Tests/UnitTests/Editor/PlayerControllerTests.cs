@@ -13,7 +13,7 @@ public class PlayerControllerTests
 		var fireAimMock = GetFireAimMock();
 		var playerController = GetPlayerControllerMock(fireAimMock);
 
-		Assert.That(playerController.initialFireDirection == Vector3.right);
+		Assert.That(playerController.currentFireDirection == Vector3.right);
 	}
 	
 	[Test]
@@ -34,11 +34,11 @@ public class PlayerControllerTests
 	[Category("Firing and Aiming")]
 	public void FaceDirectionCalledOnApplyFireCallWhenFireAimJoystickNotNeutral() {
 		
-		var fireAimMock = GetFireAimMock();
+		//var fireAimMock = GetFireAimMock();
 		//var moveMock = GetMoveMock();
-		var playerController = GetPlayerControllerMock(fireAimMock);
+		//var playerController = GetPlayerControllerMock(fireAimMock);
 		
-		playerController.Move (Vector3.zero, 0, 0, 0);
+		//playerController.Move (Vector3.zero, 0, 0, 0);
 
 		Assert.Fail ();
 	}
