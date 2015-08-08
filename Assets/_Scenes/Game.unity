@@ -269,6 +269,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1410167129}
   m_RootOrder: 0
+--- !u!1001 &503962913
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .0900000036
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 8.85000038
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441300, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: movementJoystick
+      value: 
+      objectReference: {fileID: 1410167130}
+    - target: {fileID: 11441300, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: fireAimJoystick
+      value: 
+      objectReference: {fileID: 1974599853}
+    m_RemovedComponents:
+    - {fileID: 11498656, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &505751887
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,56 +482,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!1001 &1150969522
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: .0900000036
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 8.85000038
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 418634, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 11441300, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: movementJoystick
-      value: 
-      objectReference: {fileID: 1410167130}
-    - target: {fileID: 11441300, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-      propertyPath: fireAimJoystick
-      value: 
-      objectReference: {fileID: 1974599853}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1410167128
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1410167128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.44767475, y: -2.5, z: 0}
+  m_LocalPosition: {x: -7.15083122, y: -2.5, z: 0}
   m_LocalScale: {x: 1.79999995, y: 1.79999995, z: 1}
   m_Children:
   - {fileID: 479123230}
@@ -779,7 +780,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1974599851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.44767475, y: -2.5, z: 0}
+  m_LocalPosition: {x: 7.15083122, y: -2.5, z: 0}
   m_LocalScale: {x: 1.79999995, y: 1.79999995, z: 1}
   m_Children:
   - {fileID: 1761835369}

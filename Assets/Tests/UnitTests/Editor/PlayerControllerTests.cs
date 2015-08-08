@@ -13,34 +13,26 @@ public class PlayerControllerTests
 		var fireAimMock = GetFireAimMock();
 		var playerController = GetPlayerControllerMock(fireAimMock);
 
+		playerController.ApplyFire(new Quaternion(), 0);
+
 		Assert.That(playerController.currentFireDirection == Vector3.right);
 	}
-	
-	[Test]
-	[Category("Firing and Aiming")]
-	public void FireAimJoystickNeutralReflectsObjectState() {
-		var fireAimMock = GetFireAimMock();
-		var playerController = GetPlayerControllerMock(fireAimMock);
 		
-		playerController.FireAimJoystickNeutral();
-		//Assert.That(playerController.firing == true);
-		playerController.FireAimJoystickNeutral();
-		//Assert.That(playerController.firing == false);
-
-		Assert.Fail ();
-	}
-	
 	[Test]
 	[Category("Firing and Aiming")]
 	public void FaceDirectionCalledOnApplyFireCallWhenFireAimJoystickNotNeutral() {
 		
-		//var fireAimMock = GetFireAimMock();
-		//var moveMock = GetMoveMock();
-		//var playerController = GetPlayerControllerMock(fireAimMock);
-		
-		//playerController.Move (Vector3.zero, 0, 0, 0);
+		var fireAimMock = GetFireAimMock();
 
-		Assert.Fail ();
+		fireAimMock.GetFireAimAxes().Returns(Vector3.right);
+
+		var playerController = GetPlayerControllerMock(fireAimMock);
+
+		playerController.FireAimJoystickNeutral().Returns(false);
+
+		playerController.ApplyFire(new Quaternion(), 0);
+
+		playerController.Received(1).FaceDirection (Vector3.right, new Quaternion(), 0);
 	}
 
 	[Test]
@@ -104,6 +96,14 @@ public class PlayerControllerTests
 		var playerController = Substitute.For<PlayerController>();
 		playerController.SetMovementController(move);
 		
+		return playerController;
+	}
+
+	private PlayerController GetPlayerControllerMock (IMovementController move, IFireAimController fireAim) {
+		
+		var playerController = Substitute.For<PlayerController>();
+		playerController.SetMovementController(move);
+		playerController.SetFireAimController(fireAim);
 		return playerController;
 	}
 }

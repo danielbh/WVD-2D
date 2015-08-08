@@ -41,6 +41,7 @@ GameObject:
   - 4: {fileID: 418634}
   - 212: {fileID: 21217682}
   - 114: {fileID: 11441300}
+  - 114: {fileID: 11498656}
   - 50: {fileID: 5052376}
   m_Layer: 0
   m_Name: Player
@@ -114,18 +115,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b999a7377289b45bb77519ade3d710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController:
-    firing: 0
+  controller:
+    currentFireDirection: {x: 0, y: 0, z: 0}
   movementJoystick: {fileID: 0}
   fireAimJoystick: {fileID: 0}
   staff: {fileID: 122304}
   arrow: {fileID: 172676}
   projectileSpeed: 8
   projectile: {fileID: 122682, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
-  moveSpeed: 2
   firingRate: .200000003
   turnSpeed: 100
-  fireDirection: {x: 0, y: 0, z: 0}
+  moveSpeed: 2
+--- !u!114 &11498656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb961d883eef5d4db8dc730ca5ea6f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21217682
 SpriteRenderer:
   m_ObjectHideFlags: 1
