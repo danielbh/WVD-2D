@@ -91,7 +91,7 @@ public class PlayerTests
 		var moveMock = GetMoveMock();
 		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
 
-		Vector3 currentPos = Vector2.zero;
+		Vector3 currentPos = Vector3.zero;
 		Vector3 moveDirection = Vector3.right;
 		float moveSpeed = 2;
 
@@ -100,7 +100,7 @@ public class PlayerTests
 		Vector3 target = moveDirection * moveSpeed + currentPos;
 		
 		moveMock.Received(1).VectorLerp (Vector3.zero, target, Time.deltaTime);
-		Assert.Fail () ;// try to make pass without test wrapper.
+
 	}
 
 	[Test]
@@ -127,7 +127,17 @@ public class PlayerTests
 	[Test]
 	[Category("Movement")]
 	public void InMoveFunctionCallWhenMoveDirectionNotZeroAndFireAimJoystickIsNeutralFaceDirectionNotCalled() {
-		Assert.Fail();
+
+		var moveMock = GetMoveMock();
+		var fireAimMock = GetFireAimMock();
+
+		fireAimMock.GetFireAimAxes().Returns(Vector3.right);
+
+		var playerController = GetPlayerControllerMock(moveMock, fireAimMock);
+		
+		playerController.Move (Vector3.zero, Vector3.right,2, new Quaternion(), 0);
+		
+		moveMock.DidNotReceive().FaceDirection(new Quaternion());
 	}
 	
 	private IFireAimController GetFireAimMock () {
