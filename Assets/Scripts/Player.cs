@@ -3,10 +3,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour, IFireAimController, IMovementController {
+public class Player : MonoBehaviour, IFireAimController, IMoveController {
 	
 	public PlayerController controller;
-	public CNJoystick movementJoystick;
+	public CNJoystick moveJoystick;
 	public CNJoystick fireAimJoystick;
 	
 	public GameObject staff;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 	// Use this for initialization
 	public void OnEnable () {
 		controller.SetFireAimController (this);
-		controller.SetMovementController (this);
+		controller.SetMoveController (this);
 		fireAimJoystick.FingerTouchedEvent += StartFiring;
 		fireAimJoystick.FingerLiftedEvent += StopFiring;
 	}
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 	}
 	
 	void Update () {
-		float h = movementJoystick.GetAxis("Horizontal"), v = movementJoystick.GetAxis("Vertical");
+		float h = moveJoystick.GetAxis("Horizontal"), v = moveJoystick.GetAxis("Vertical");
 		
 		if (h != 0 || v != 0) {
 			transform.position = controller.Move(transform.position, new Vector2(h, v), moveSpeed, arrow.transform.rotation, turnSpeed);
@@ -71,10 +71,16 @@ public class Player : MonoBehaviour, IFireAimController, IMovementController {
 
 	#endregion
 	
-	#region IMovementController implementation
+	#region IMoveController implementation
+
 	public void FaceDirection(Quaternion newDirection) { 
 		arrow.transform.rotation = newDirection;
 	}
-	
+
+	// Wrapper for tests
+	public Vector3 VectorLerp (Vector3 currentPos, Vector3 target, float deltaTime) {
+		return Vector3.Lerp (currentPos, target, deltaTime);
+	}
+
 	#endregion	
 }

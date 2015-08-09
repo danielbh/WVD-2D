@@ -7,15 +7,15 @@ using System;
 public class PlayerController {
 	
 	public IFireAimController fireAimController;
-	public IMovementController movementController;
+	public IMoveController moveController;
 	public Vector3 currentFireDirection;
 	
 	public void SetFireAimController (IFireAimController controller) {
 		fireAimController = controller;
 	}
 	
-	public void SetMovementController (IMovementController controller) {
-		movementController = controller;
+	public void SetMoveController (IMoveController controller) {
+		moveController = controller;
 	}
 	
 	public void ApplyFire(Quaternion oldFireDirection, float turnSpeed) {
@@ -23,7 +23,7 @@ public class PlayerController {
 		var direction = GetFireAimAxes();
 
 		direction.Normalize();
-		
+
 		if (!FireAimJoystickNeutral()) { 
 			// FIXME: Turns choppy needs to be made smooth. I feel like some of these arguments not neccesary.
 			FaceDirection(direction, oldFireDirection, turnSpeed); 
@@ -40,16 +40,16 @@ public class PlayerController {
 
 	public Vector3 GetFireAimAxes() { return fireAimController.GetFireAimAxes(); }
 	
-	public Vector3 Move (Vector3 currentPosition, Vector2 movementAxes, float moveSpeed, Quaternion oldDirection, float turnSpeed) {
-		Vector3 moveDirection = movementAxes;
-		Vector3 target = moveDirection * moveSpeed + currentPosition;
+	public Vector3 Move (Vector3 currentPos, Vector3 moveAxes, float moveSpeed, Quaternion oldDirection, float turnSpeed) {
+		Vector3 moveDirection = moveAxes;
+		Vector3 target = moveDirection * moveSpeed + currentPos;
 		
 		if (moveDirection != Vector3.zero && FireAimJoystickNeutral() == true) { 
 			FaceDirection (moveDirection, oldDirection, turnSpeed); 
 		}
 		
 		// New position
-		return Vector3.Lerp (currentPosition, target, Time.deltaTime); 
+		return moveController.VectorLerp (currentPos, target, Time.deltaTime); 
 	}
 	
 	public void FaceDirection(Vector3 newDirection, Quaternion oldDirection, float turnSpeed) { 
@@ -63,7 +63,7 @@ public class PlayerController {
 		// Rotate player in new direction
 		var newOrientation = Quaternion.Slerp(oldDirection, Quaternion.Euler( 0, 0, targetAngle ), turnSpeed * Time.deltaTime );
 
-		movementController.FaceDirection(newOrientation);
+		moveController.FaceDirection(newOrientation);
 	}
 }
 
