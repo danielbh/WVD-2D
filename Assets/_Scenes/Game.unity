@@ -373,6 +373,14 @@ Prefab:
       propertyPath: moveJoystick
       value: 
       objectReference: {fileID: 1410167130}
+    - target: {fileID: 5052376, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052376, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11498656, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
@@ -431,6 +439,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!1 &763995651 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 196614, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+  m_PrefabInternal: {fileID: 503962913}
+--- !u!61 &763995656
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 763995651}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .0129842963, y: -.0463724136}
+  serializedVersion: 2
+  m_Size: {x: .294988126, y: .56209439}
 --- !u!1 &1038068921
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +793,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1572458470}
   - 212: {fileID: 1572458469}
+  - 68: {fileID: 1572458471}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -813,6 +839,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!68 &1572458471
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1572458468}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 2.27988863, y: .2756567}
+  - {x: 2.20018768, y: -.639193535}
+  - {x: .925332546, y: -1.0289216}
+  - {x: -2.58445358, y: -.494030952}
+  - {x: -2.74137282, y: -.0413012505}
+  - {x: -2.63601923, y: .494725704}
+  - {x: -2.81655216, y: 1.13451862}
+  - {x: -2.75195694, y: 1.82798481}
+  - {x: -1.39391744, y: 3.28808784}
+  - {x: -.251159847, y: 3.3007493}
+  - {x: .587383926, y: 3.3910141}
+  - {x: .995497108, y: 3.40203762}
+  - {x: 1.43301177, y: 3.26207304}
+  - {x: 1.64349496, y: 3.1133914}
+  - {x: 2.2274282, y: 2.5441637}
+  - {x: 2.47453833, y: 1.42842507}
+  - {x: 2.30399227, y: .530332088}
+  - {x: 2.2931881, y: .233248234}
 --- !u!1 &1761835368
 GameObject:
   m_ObjectHideFlags: 0
