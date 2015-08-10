@@ -411,6 +411,18 @@ Prefab:
       propertyPath: fireAimJoystick
       value: 
       objectReference: {fileID: 1974599853}
+    - target: {fileID: 172676, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 122304, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 196614, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
   m_IsPrefabParent: 0
@@ -701,7 +713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed91a055bc3f60a46a64e83aee3676ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touched: 0
+  touched: 1
   _anchor: 9
   _axisNameX: Horizontal
   _axisNameY: Vertical
@@ -783,7 +795,7 @@ GameObject:
   - 4: {fileID: 1572458470}
   - 212: {fileID: 1572458469}
   - 68: {fileID: 1572458471}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

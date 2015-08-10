@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IMoveController {
+public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 
 	public EnemyController controller;
 	public float moveSpeed = 2;
+	public int maxHitPoints = 100;
+	public int hitPoints;
 
 	private Player player;
 	
@@ -14,6 +16,8 @@ public class Enemy : MonoBehaviour, IMoveController {
 
 	public void OnEnable() {
 		controller.SetMoveController (this);
+		controller.SetHitPointsController(this);
+		hitPoints = maxHitPoints;
 	}
 
 	public void Update() {
@@ -22,10 +26,25 @@ public class Enemy : MonoBehaviour, IMoveController {
 		}
 	}
 
+	void OnTriggerEnter2D (Collider2D collider) {
+		if (collider.gameObject.layer == 10) {
+			controller.ReduceHitPoints(20, hitPoints);
+			Destroy (collider.gameObject);
+		}
+	}
+	
+	#region IMoveController implementation
+
+	public void ReduceHitPoints(int damage) { hitPoints -= damage; }
+
+	// Test wrapper
+	public void Destroy() { Destroy (gameObject); }
+
+	#endregion
+
 	#region IMoveController implementation
 	
-	public void FaceDirection(Quaternion newDirection) { 
-	}
+	public void FaceDirection(Quaternion newDirection) { }
 	
 	// Wrapper for tests
 	public Vector3 Move (Vector3 currentPos, Vector3 target, float deltaTime) {

@@ -5,12 +5,17 @@ using System;
 public class HumanoidController {
 
 	public IMoveController moveController;
+	public IHitPointsController hpController;
 	public Vector3 currentFireDirection;
 
 	public void SetMoveController (IMoveController controller) {
 		moveController = controller;
 	}
 
+	public void SetHitPointsController (IHitPointsController controller) {
+		hpController = controller;
+	}
+	
 	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed) {
 		Vector3 target = moveDirection * moveSpeed + currentPos;
 		return moveController.Move (currentPos, target, Time.deltaTime); 
@@ -28,5 +33,13 @@ public class HumanoidController {
 		var newRotation = Quaternion.Slerp(oldRotation, Quaternion.Euler( 0, 0, targetAngle ), turnSpeed * Time.deltaTime );
 		
 		moveController.FaceDirection(newRotation);
+	}
+
+	public void ReduceHitPoints (int damage, int currentHP) {
+		if (damage >= currentHP) {
+			hpController.Destroy ();
+		} else {
+			hpController.ReduceHitPoints(damage);
+		}
 	}
 }

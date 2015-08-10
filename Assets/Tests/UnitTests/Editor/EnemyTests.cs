@@ -23,23 +23,46 @@ public class EnemyTests  {
 	[Test]
 	[Category("Hitpoints")]
 	public void EnemyLosesHitPoints() {
-		Assert.Fail();
+		var hpMock = GetHitPointsMock();
+		var enemyMock = GetEnemyControllerMock(hpMock);
+
+		enemyMock.ReduceHitPoints (25, 100);
+
+		hpMock.Received(1).ReduceHitPoints(25);
 	}
 
 	[Test]
 	[Category("Hitpoints")]
 	public void EnemyDiesOnZeroHitPoints() {
-		Assert.Fail();
+		var hpMock = GetHitPointsMock();
+		var enemyMock = GetEnemyControllerMock(hpMock);
+		
+		enemyMock.ReduceHitPoints (25,25);
+		
+		hpMock.DidNotReceive().ReduceHitPoints(25);
+		hpMock.Received(1).Destroy();
 	}
 
 	private IMoveController GetMoveMock () {
 		return Substitute.For<IMoveController> ();
+	}
+
+	private IHitPointsController GetHitPointsMock () {
+		return Substitute.For<IHitPointsController> ();
 	}
 	
 	private EnemyController GetEnemyControllerMock (IMoveController move) {
 		
 		var controller = Substitute.For<EnemyController>();
 		controller.SetMoveController(move);
+		
+		return controller;
+	}
+
+	private EnemyController GetEnemyControllerMock (IHitPointsController hp) {
+		
+		var controller = Substitute.For<EnemyController>();
+		controller.SetHitPointsController(hp);
 		
 		return controller;
 	}
