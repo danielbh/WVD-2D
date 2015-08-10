@@ -78,7 +78,7 @@ public class Player : MonoBehaviour, IFireAimController, IMoveController {
 	}
 
 	// Wrapper for tests
-	public Vector3 VectorLerp (Vector3 currentPos, Vector3 target, float deltaTime) {
+	public Vector3 Move (Vector3 currentPos, Vector3 target, float deltaTime) {
 		return Vector3.Lerp (currentPos, target, deltaTime);
 	}
 

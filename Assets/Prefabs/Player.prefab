@@ -41,11 +41,11 @@ GameObject:
   - 4: {fileID: 418634}
   - 212: {fileID: 21217682}
   - 114: {fileID: 11441300}
-  - 114: {fileID: 11498656}
   - 50: {fileID: 5052376}
+  - 61: {fileID: 6148542}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,7 +103,20 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &6148542
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196614}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .0129842963, y: -.0463724136}
+  serializedVersion: 2
+  m_Size: {x: .294988126, y: .56209439}
 --- !u!114 &11441300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller:
     currentFireDirection: {x: 0, y: 0, z: 0}
-  movementJoystick: {fileID: 0}
+  moveJoystick: {fileID: 0}
   fireAimJoystick: {fileID: 0}
   staff: {fileID: 122304}
   arrow: {fileID: 172676}
@@ -126,17 +139,6 @@ MonoBehaviour:
   firingRate: .200000003
   turnSpeed: 100
   moveSpeed: 2
---- !u!114 &11498656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 196614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb961d883eef5d4db8dc730ca5ea6f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &21217682
 SpriteRenderer:
   m_ObjectHideFlags: 1

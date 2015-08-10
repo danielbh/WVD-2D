@@ -88,19 +88,17 @@ public class PlayerTests
 	[Test]
 	[Category("Movement")]
 	public void PlayerMovesDesignatedAmount() {
-		var moveMock = GetMoveMock();
-		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
 
 		Vector3 currentPos = Vector3.zero;
 		Vector3 moveDirection = Vector3.right;
 		float moveSpeed = 2;
+		Vector3 target = moveDirection * moveSpeed + currentPos;
 
+		var moveMock = GetMoveMock();
+		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
 		playerController.Move (Vector3.zero, moveDirection,2, new Quaternion(), 0);
 
-		Vector3 target = moveDirection * moveSpeed + currentPos;
-		
-		moveMock.Received(1).VectorLerp (Vector3.zero, target, Time.deltaTime);
-
+		moveMock.Received(1).Move (Vector3.zero, target, Time.deltaTime);
 	}
 
 	[Test]
@@ -147,7 +145,7 @@ public class PlayerTests
 	private IMoveController GetMoveMock () {
 		return Substitute.For<IMoveController> ();
 	}
-	
+
 	private PlayerController GetPlayerControllerMock (IFireAimController fireAim) {
 		var playerController = Substitute.For<PlayerController>();
 		playerController.SetFireAimController(fireAim);
