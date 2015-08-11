@@ -4,7 +4,8 @@ using UnityEngine;
 using System.Collections;
 
 public class Player : MonoBehaviour, IFireAimController, IMoveController {
-	
+
+	[HideInInspector]
 	public PlayerController controller;
 	public CNJoystick moveJoystick;
 	public CNJoystick fireAimJoystick;
@@ -78,8 +79,9 @@ public class Player : MonoBehaviour, IFireAimController, IMoveController {
 	}
 
 	// Wrapper for tests
-	public Vector3 Move (Vector3 currentPos, Vector3 target, float deltaTime) {
-		return Vector3.Lerp (currentPos, target, deltaTime);
+	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
+		//TIP: Use Vecto3.Lerp instead for acceleration with joystick.
+		return Vector3.MoveTowards (currentPos, target, moveSpeed);
 	}
 
 	#endregion	

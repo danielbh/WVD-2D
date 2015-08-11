@@ -3,11 +3,12 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 
+	[HideInInspector]
 	public EnemyController controller;
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
 	public int hitPoints;
-
+	
 	private Player player;
 	
 	public void Start() {
@@ -27,7 +28,8 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		if (collider.gameObject.layer == 10) {
+		int playerProjectileLayer = 10;
+		if (collider.gameObject.layer == playerProjectileLayer) {
 			controller.ReduceHitPoints(20, hitPoints);
 			Destroy (collider.gameObject);
 		}
@@ -47,8 +49,8 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 	public void FaceDirection(Quaternion newDirection) { }
 	
 	// Wrapper for tests
-	public Vector3 Move (Vector3 currentPos, Vector3 target, float deltaTime) {
-		return Vector3.MoveTowards(currentPos, target, deltaTime);
+	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
+		return Vector3.MoveTowards(currentPos, target, moveSpeed);
 	}
 
 	#endregion

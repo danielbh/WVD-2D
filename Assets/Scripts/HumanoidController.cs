@@ -16,9 +16,8 @@ public class HumanoidController {
 		hpController = controller;
 	}
 	
-	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed) {
-		Vector3 target = moveDirection * moveSpeed + currentPos;
-		return moveController.Move (currentPos, target, Time.deltaTime); 
+	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
+		return moveController.Move (currentPos, target, moveSpeed * Time.deltaTime); 
 	}
 	
 	public void FaceDirection(Vector3 newDirection, Quaternion oldRotation, float turnSpeed) { 

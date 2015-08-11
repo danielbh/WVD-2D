@@ -33,17 +33,16 @@ public class PlayerController: HumanoidController {
 	public bool FireAimJoystickNeutral() { return GetFireAimAxes() == Vector3.zero; }
 
 	public Vector3 GetFireAimAxes() { return fireAimController.GetFireAimAxes(); }
-
-	//FIXME: This should be an overridden method because its actually overriding the old method. Unfortunately NSubsitute has issues with mocking 
-	// If Virtual is used in this way. Therefore I've decded to just let it go. There appears to be no consequence at the time of writing this besides it being
-	// "bad design." Id rather it be testable than be a "good design" or "true polymorphism"
+	
 	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed, Quaternion oldRotation, float turnSpeed) {
+
+		Vector3 target = moveDirection * moveSpeed + currentPos;
 
 		if (moveDirection != Vector3.zero && FireAimJoystickNeutral() == true) { 
 			FaceDirection (moveDirection, oldRotation, turnSpeed); 
 		}
 
-		return base.Move(currentPos, moveDirection, moveSpeed);
+		return base.Move(currentPos, target, moveSpeed);
 	}
 
 }

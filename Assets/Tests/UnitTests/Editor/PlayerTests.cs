@@ -98,7 +98,7 @@ public class PlayerTests
 		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
 		playerController.Move (Vector3.zero, moveDirection,2, new Quaternion(), 0);
 
-		moveMock.Received(1).Move (Vector3.zero, target, Time.deltaTime);
+		moveMock.Received(1).Move (Vector3.zero, target, moveSpeed * Time.deltaTime);
 	}
 
 	[Test]
