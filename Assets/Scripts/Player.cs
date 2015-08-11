@@ -1,9 +1,9 @@
-﻿// Unmockable code object that controls how the joysticks connect with player
+// Unmockable code object that controls how the joysticks connect with player
 
 using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour, IFireAimController, IMoveController {
+public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
 
 	[HideInInspector]
 	public PlayerController controller;
@@ -17,12 +17,12 @@ public class Player : MonoBehaviour, IFireAimController, IMoveController {
 	public GameObject projectile;
 	public float firingRate= 0.2f;
 	public float turnSpeed = 50;
-	
 	public float moveSpeed= 2 ;
+
 
 	// Use this for initialization
 	public void OnEnable () {
-		controller.SetFireAimController (this);
+		controller.SetAttackController (this);
 		controller.SetMoveController (this);
 		fireAimJoystick.FingerTouchedEvent += StartFiring;
 		fireAimJoystick.FingerLiftedEvent += StopFiring;
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour, IFireAimController, IMoveController {
 		}
 	}
 	
-	#region IFireAimController implementation
+	#region IPlayerAttackController implementation
 	
 	public void Fire (Vector3 direction) {
 		GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject; 

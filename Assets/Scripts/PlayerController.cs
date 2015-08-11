@@ -1,4 +1,4 @@
-﻿// Humble Object used to test logic of code while decoupling code that cannot be mocked.
+// Humble Object used to test logic of code while decoupling code that cannot be mocked.
 
 using UnityEngine;
 using System;
@@ -6,10 +6,10 @@ using System;
 [Serializable]
 public class PlayerController: HumanoidController {
 	
-	public IFireAimController fireAimController;
+	public IPlayerAttackController attackController;
 	
-	public void SetFireAimController (IFireAimController controller) {
-		fireAimController = controller;
+	public void SetAttackController (IPlayerAttackController controller) {
+		attackController = controller;
 	}
 	
 	public void ApplyFire(Quaternion oldFireDirection, float turnSpeed) {
@@ -27,12 +27,12 @@ public class PlayerController: HumanoidController {
 		}
 
 		// Use class variable if joystick is neutral. This preserves last aimed direction.
-		fireAimController.Fire(this.currentFireDirection);
+		attackController.Fire(this.currentFireDirection);
 	}
 	
 	public bool FireAimJoystickNeutral() { return GetFireAimAxes() == Vector3.zero; }
 
-	public Vector3 GetFireAimAxes() { return fireAimController.GetFireAimAxes(); }
+	public Vector3 GetFireAimAxes() { return attackController.GetFireAimAxes(); }
 	
 	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed, Quaternion oldRotation, float turnSpeed) {
 

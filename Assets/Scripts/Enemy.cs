@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
+public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IEnemyAttackController {
 
 	[HideInInspector]
 	public EnemyController controller;
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
 	public int hitPoints;
+	public GameObject attackSprite;
 	
 	private Player player;
 	
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 	public void OnEnable() {
 		controller.SetMoveController (this);
 		controller.SetHitPointsController(this);
+		controller.SetAttackController(this);
 		hitPoints = maxHitPoints;
 	}
 
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
+		// TODO: Move to different class to be more consistent?
 		int playerProjectileLayer = 10;
 		if (collider.gameObject.layer == playerProjectileLayer) {
 			controller.ReduceHitPoints(20, hitPoints);
@@ -51,6 +54,17 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController {
 	// Wrapper for tests
 	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
 		return Vector3.MoveTowards(currentPos, target, moveSpeed);
+	}
+
+	#endregion
+
+	#region IEnemyAttackController implementation
+
+	public void Attack() {
+		print ("Enemy Attacking!");
+		// spawn attack sprite
+		Instantiate(attackSprite, player.transform.position, Quaternion.identity); 
+		// deal damage to Player
 	}
 
 	#endregion

@@ -10,8 +10,8 @@ public class PlayerTests
 	[Test]
 	[Category("Firing and Aiming")]
 	public void InitialFireDirectionIsAsExpected() {
-		var fireAimMock = GetFireAimMock();
-		var playerController = GetPlayerControllerMock(fireAimMock);
+		var attackMock = GetAttackMock();
+		var playerController = GetPlayerControllerMock(attackMock);
 
 		playerController.ApplyFire(new Quaternion(), 0);
 
@@ -23,11 +23,11 @@ public class PlayerTests
 	public void FaceDirectionCalledOnApplyFireCallWhenFireAimJoystickNotNeutral() {
 
 		var moveMock = GetMoveMock();
-		var fireAimMock = GetFireAimMock();
+		var attackMock = GetAttackMock();
 
-		fireAimMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.GetFireAimAxes().Returns(Vector3.right);
 
-		var playerController = GetPlayerControllerMock(moveMock, fireAimMock);
+		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 
 		playerController.ApplyFire(new Quaternion(), 0);
 
@@ -40,11 +40,11 @@ public class PlayerTests
 	public void FaceDirectionCalledOnApplyFireNOTCalledWhenFireAimJoystickNotNeutral() {
 		
 		var moveMock = GetMoveMock();
-		var fireAimMock = GetFireAimMock();
+		var attackMock = GetAttackMock();
 		
-		fireAimMock.GetFireAimAxes().Returns(Vector3.zero);
+		attackMock.GetFireAimAxes().Returns(Vector3.zero);
 		
-		var playerController = GetPlayerControllerMock(moveMock, fireAimMock);
+		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
 		playerController.ApplyFire(new Quaternion(), 0);
 		
@@ -55,26 +55,26 @@ public class PlayerTests
 	[Category("Firing and Aiming")]
 	public void FireRecievesExpectedFireDirection() {
 
-		var fireAimMock = GetFireAimMock();
+		var attackMock = GetAttackMock();
 		
-		fireAimMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.GetFireAimAxes().Returns(Vector3.right);
 		
-		var playerController = GetPlayerControllerMock(GetMoveMock(), fireAimMock);
+		var playerController = GetPlayerControllerMock(GetMoveMock(), attackMock);
 
 		playerController.ApplyFire(new Quaternion(), 0);
 
-		fireAimMock.Received(1).Fire(Vector3.right);
+		attackMock.Received(1).Fire(Vector3.right);
 	}
 
 	[Test]
 	[Category("Firing and Aiming")]
 	public void FireDirectionIsNormalizedAfterApplyFireCalled() {
-		var fireAimMock = GetFireAimMock();
+		var attackMock = GetAttackMock();
 		var moveMock = GetMoveMock();
 		
-		fireAimMock.GetFireAimAxes().Returns(new Vector3(1,1,0));
+		attackMock.GetFireAimAxes().Returns(new Vector3(1,1,0));
 		
-		var playerController = GetPlayerControllerMock(moveMock, fireAimMock);
+		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
 		playerController.ApplyFire(new Quaternion(), 0);
 
@@ -95,7 +95,7 @@ public class PlayerTests
 		Vector3 target = moveDirection * moveSpeed + currentPos;
 
 		var moveMock = GetMoveMock();
-		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
+		var playerController = GetPlayerControllerMock(moveMock, GetAttackMock());
 		playerController.Move (Vector3.zero, moveDirection,2, new Quaternion(), 0);
 
 		moveMock.Received(1).Move (Vector3.zero, target, moveSpeed * Time.deltaTime);
@@ -106,7 +106,7 @@ public class PlayerTests
 	public void FaceDirectionInputOutputsExpected() {
 
 		var moveMock = GetMoveMock();
-		var playerController = GetPlayerControllerMock(moveMock, GetFireAimMock());
+		var playerController = GetPlayerControllerMock(moveMock, GetAttackMock());
 
 		Quaternion oldRotation = new Quaternion(0,0,0.5f, 0.1f);
 		Vector3 newDirection = Vector3.right;
@@ -124,31 +124,31 @@ public class PlayerTests
 
 	[Test]
 	[Category("Movement")]
-	public void InMoveFunctionCallWhenMoveDirectionNotZeroAndFireAimJoystickIsNeutralFaceDirectionNotCalled() {
+	public void InMoveFunctionCallWhenMoveDirectionNotZeroAndAttackJoystickIsNeutralFaceDirectionNotCalled() {
 
 		var moveMock = GetMoveMock();
-		var fireAimMock = GetFireAimMock();
+		var attackMock = GetAttackMock();
 
-		fireAimMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.GetFireAimAxes().Returns(Vector3.right);
 
-		var playerController = GetPlayerControllerMock(moveMock, fireAimMock);
+		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
 		playerController.Move (Vector3.zero, Vector3.right,2, new Quaternion(), 0);
 		
 		moveMock.DidNotReceive().FaceDirection(new Quaternion());
 	}
 	
-	private IFireAimController GetFireAimMock () {
-		return Substitute.For<IFireAimController> ();
+	private IPlayerAttackController GetAttackMock () {
+		return Substitute.For<IPlayerAttackController> ();
 	}
 	
 	private IMoveController GetMoveMock () {
 		return Substitute.For<IMoveController> ();
 	}
 
-	private PlayerController GetPlayerControllerMock (IFireAimController fireAim) {
+	private PlayerController GetPlayerControllerMock (IPlayerAttackController fireAim) {
 		var playerController = Substitute.For<PlayerController>();
-		playerController.SetFireAimController(fireAim);
+		playerController.SetAttackController(fireAim);
 		return playerController;
 	}
 
@@ -160,11 +160,11 @@ public class PlayerTests
 		return playerController;
 	}
 
-	private PlayerController GetPlayerControllerMock (IMoveController move, IFireAimController fireAim) {
+	private PlayerController GetPlayerControllerMock (IMoveController move, IPlayerAttackController fireAim) {
 		
 		var playerController = Substitute.For<PlayerController>();
 		playerController.SetMoveController(move);
-		playerController.SetFireAimController(fireAim);
+		playerController.SetAttackController(fireAim);
 		return playerController;
 	}
 }
