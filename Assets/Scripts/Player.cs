@@ -18,6 +18,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	public float firingRate= 0.2f;
 	public float turnSpeed = 50;
 	public float moveSpeed= 2 ;
+	public GameObject damageTakenSprite;
 	public bool movementAcceleration = false; // The intensity of joystick increases the speed at which the wizard moves
 	
 	// Use this for initialization
@@ -48,6 +49,14 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 			controller.ApplyFire(arrow.transform.rotation, turnSpeed);
 			yield return new WaitForSeconds(firingRate);
 		}
+	}
+
+	public void Hit(int damage) {
+		GameObject sprite = Instantiate(damageTakenSprite, transform.position, Quaternion.identity) as GameObject; 
+		sprite.transform.parent = this.gameObject.transform;
+		float spriteLifeTime = 0.5f;
+		Destroy (sprite, spriteLifeTime);
+		// deal damage to Player
 	}
 	
 	#region IFireController implementation

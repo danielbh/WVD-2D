@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IAtta
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
 	public float attackRate = 5;
+	public int attackDamage = 25;
 	public int hitPoints;
-	public GameObject attackSprite;
 
 	private Player player;
 	
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IAtta
 
 	#endregion
 
-	#region IMoveController implementation
+	#region IMoveController implementationrun
 	
 	public void FaceDirection(Quaternion newDirection) { }
 	
@@ -72,9 +72,6 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IAtta
 	}
 
 	public void Attack() {
-		GameObject sprite = Instantiate(attackSprite, player.transform.position, Quaternion.identity) as GameObject; 
-		float spriteLifeTime = 0.5f;
-		Destroy (sprite, spriteLifeTime);
-		// deal damage to Player
+		player.Hit (attackDamage);
 	}
 }

@@ -59,9 +59,9 @@ MonoBehaviour:
     attacking: 0
   moveSpeed: 3
   maxHitPoints: 100
-  attackRate: 5
+  attackRate: 3
+  attackDamage: 25
   hitPoints: 0
-  attackSprite: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
 --- !u!212 &21282128
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: attackRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsTrigger
