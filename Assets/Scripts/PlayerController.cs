@@ -6,9 +6,9 @@ using System;
 [Serializable]
 public class PlayerController: HumanoidController {
 	
-	public IPlayerAttackController attackController;
+	public IRangedController attackController;
 	
-	public void SetAttackController (IPlayerAttackController controller) {
+	public void SetAttackController (IRangedController controller) {
 		attackController = controller;
 	}
 	
@@ -32,7 +32,7 @@ public class PlayerController: HumanoidController {
 	
 	public bool FireAimJoystickNeutral() { return GetFireAimAxes() == Vector3.zero; }
 
-	public Vector3 GetFireAimAxes() { return attackController.GetFireAimAxes(); }
+	public Vector3 GetFireAimAxes() { return attackController.Aim(); }
 	
 	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed, Quaternion oldRotation, float turnSpeed) {
 

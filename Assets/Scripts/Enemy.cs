@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IEnemyAttackController {
+public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IAttackController {
 
 	[HideInInspector]
 	public EnemyController controller;
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
+	public float attackRate = 5;
 	public int hitPoints;
 	public GameObject attackSprite;
-	
+
 	private Player player;
 	
 	public void Start() {
@@ -29,15 +30,10 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IEnem
 		}
 	}
 
-	void OnTriggerEnter2D (Collider2D collider) {
-		// TODO: Move to different class to be more consistent?
-		int playerProjectileLayer = 10;
-		if (collider.gameObject.layer == playerProjectileLayer) {
-			controller.ReduceHitPoints(20, hitPoints);
-			Destroy (collider.gameObject);
-		}
+	public void Hit(int damage) {
+		controller.ReduceHitPoints(damage, hitPoints);
 	}
-	
+
 	#region IMoveController implementation
 
 	public void ReduceHitPoints(int damage) { hitPoints -= damage; }
@@ -59,14 +55,26 @@ public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IEnem
 	#endregion
 
 	#region IEnemyAttackController implementation
-
-	public void Attack() {
-		print ("Enemy Attacking!");
-		// spawn attack sprite
-		Instantiate(attackSprite, player.transform.position, Quaternion.identity); 
-		// deal damage to Player
+	public void StartAttacking() {
+		StartCoroutine ("AttackingSequence"); 
 	}
-
+	
+	public void StopAttacking() {
+		StopCoroutine("AttackingSequence");
+	}
 	#endregion
 
+	public  IEnumerator AttackingSequence() {
+		for (;;) {
+			controller.AttemptHit(attackRate);
+			yield return new WaitForSeconds(attackRate);
+		}
+	}
+
+	public void Attack() {
+		GameObject sprite = Instantiate(attackSprite, player.transform.position, Quaternion.identity) as GameObject; 
+		float spriteLifeTime = 0.5f;
+		Destroy (sprite, spriteLifeTime);
+		// deal damage to Player
+	}
 }

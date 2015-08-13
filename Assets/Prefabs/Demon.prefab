@@ -38,7 +38,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 106140}
   m_Enabled: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
@@ -56,8 +56,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller:
     currentFireDirection: {x: 0, y: 0, z: 0}
+    attacking: 0
   moveSpeed: 3
   maxHitPoints: 100
+  attackRate: 5
   hitPoints: 0
   attackSprite: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
 --- !u!212 &21282128
@@ -92,7 +94,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: attackRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106140}

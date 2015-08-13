@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
+public class Player : MonoBehaviour, IRangedController, IMoveController {
 
 	[HideInInspector]
 	public PlayerController controller;
@@ -18,19 +18,19 @@ public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
 	public float firingRate= 0.2f;
 	public float turnSpeed = 50;
 	public float moveSpeed= 2 ;
-
-
+	public bool movementAcceleration = false; // The intensity of joystick increases the speed at which the wizard moves
+	
 	// Use this for initialization
 	public void OnEnable () {
 		controller.SetAttackController (this);
 		controller.SetMoveController (this);
-		fireAimJoystick.FingerTouchedEvent += StartFiring;
-		fireAimJoystick.FingerLiftedEvent += StopFiring;
+		fireAimJoystick.FingerTouchedEvent += Attack;
+		fireAimJoystick.FingerLiftedEvent += StopAttacking;
 	}
 	
 	void OnDisable() {
-		fireAimJoystick.FingerTouchedEvent -= StartFiring;
-		fireAimJoystick.FingerLiftedEvent -= StopFiring;
+		fireAimJoystick.FingerTouchedEvent -= Attack;
+		fireAimJoystick.FingerLiftedEvent -= StopAttacking;
 	}
 	
 	void Update () {
@@ -40,17 +40,8 @@ public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
 			transform.position = controller.Move(transform.position, new Vector2(h, v), moveSpeed, arrow.transform.rotation, turnSpeed);
 		}
 	}
-	
-	public void StartFiring() {
-		StartCoroutine ("FiringSequence"); 
-	}
-	
-	public void StopFiring() {
-		StopCoroutine("FiringSequence");
-	}
-	
-	// Easier to test with Coroutine
-	IEnumerator FiringSequence() {
+
+	public  IEnumerator AttackingSequence() {
 		yield return new WaitForSeconds(0.00001f);
 		
 		for (;;) {
@@ -59,14 +50,22 @@ public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
 		}
 	}
 	
-	#region IPlayerAttackController implementation
+	#region IFireController implementation
+
+	public void Attack() {
+		StartCoroutine ("AttackingSequence"); 
+	}
 	
+	public void StopAttacking() {
+		StopCoroutine("AttackingSequence");
+	}
+
 	public void Fire (Vector3 direction) {
 		GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject; 
 		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x * projectileSpeed , direction.y * projectileSpeed,0); 
 	}
 	
-	public Vector3 GetFireAimAxes() {
+	public Vector3 Aim() {
 		return new Vector3(fireAimJoystick.GetAxis("Horizontal"), fireAimJoystick.GetAxis("Vertical"), 0);
 	}
 
@@ -80,7 +79,11 @@ public class Player : MonoBehaviour, IPlayerAttackController, IMoveController {
 
 	// Wrapper for tests
 	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
-		//TIP: Use Vecto3.Lerp instead for acceleration with joystick.
+
+		if (movementAcceleration) {
+			return Vector3.Lerp (currentPos, target, moveSpeed);
+		}
+
 		return Vector3.MoveTowards (currentPos, target, moveSpeed);
 	}
 

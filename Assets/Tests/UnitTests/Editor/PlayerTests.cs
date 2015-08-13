@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -25,7 +25,7 @@ public class PlayerTests
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 
-		attackMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.Aim().Returns(Vector3.right);
 
 		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 
@@ -42,7 +42,7 @@ public class PlayerTests
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 		
-		attackMock.GetFireAimAxes().Returns(Vector3.zero);
+		attackMock.Aim().Returns(Vector3.zero);
 		
 		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
@@ -57,7 +57,7 @@ public class PlayerTests
 
 		var attackMock = GetAttackMock();
 		
-		attackMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.Aim().Returns(Vector3.right);
 		
 		var playerController = GetPlayerControllerMock(GetMoveMock(), attackMock);
 
@@ -72,7 +72,7 @@ public class PlayerTests
 		var attackMock = GetAttackMock();
 		var moveMock = GetMoveMock();
 		
-		attackMock.GetFireAimAxes().Returns(new Vector3(1,1,0));
+		attackMock.Aim().Returns(new Vector3(1,1,0));
 		
 		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
@@ -129,7 +129,7 @@ public class PlayerTests
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 
-		attackMock.GetFireAimAxes().Returns(Vector3.right);
+		attackMock.Aim().Returns(Vector3.right);
 
 		var playerController = GetPlayerControllerMock(moveMock, attackMock);
 		
@@ -138,17 +138,17 @@ public class PlayerTests
 		moveMock.DidNotReceive().FaceDirection(new Quaternion());
 	}
 	
-	private IPlayerAttackController GetAttackMock () {
-		return Substitute.For<IPlayerAttackController> ();
+	private IRangedController GetAttackMock () {
+		return Substitute.For<IRangedController> ();
 	}
 	
 	private IMoveController GetMoveMock () {
 		return Substitute.For<IMoveController> ();
 	}
 
-	private PlayerController GetPlayerControllerMock (IPlayerAttackController fireAim) {
+	private PlayerController GetPlayerControllerMock (IRangedController attack) {
 		var playerController = Substitute.For<PlayerController>();
-		playerController.SetAttackController(fireAim);
+		playerController.SetAttackController(attack);
 		return playerController;
 	}
 
@@ -160,11 +160,11 @@ public class PlayerTests
 		return playerController;
 	}
 
-	private PlayerController GetPlayerControllerMock (IMoveController move, IPlayerAttackController fireAim) {
+	private PlayerController GetPlayerControllerMock (IMoveController move, IRangedController attack) {
 		
 		var playerController = Substitute.For<PlayerController>();
 		playerController.SetMoveController(move);
-		playerController.SetAttackController(fireAim);
+		playerController.SetAttackController(attack);
 		return playerController;
 	}
 }

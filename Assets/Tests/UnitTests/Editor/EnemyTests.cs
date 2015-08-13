@@ -76,13 +76,53 @@ public class EnemyTests  {
 		enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
 
 		// verify attack not called
-		attackMock.DidNotReceive().Attack();
+		attackMock.DidNotReceive().StartAttacking();
 
 		// Make enemy in range
 		target = Vector3.right;
 		enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
 		// Verify attack called
-		attackMock.Received().Attack();
+		attackMock.Received().StartAttacking();
+	}
+
+	[Test]
+	[Category("Combat")]
+	public void IfEnemyAttackingStartAttackingNotCalled() {
+		var moveMock = GetMoveMock();
+		var attackMock = GetAttackMock();
+		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+
+		enemyMock.attacking = true;
+
+		enemyMock.Move (Vector3.zero, Vector3.right,2, new Quaternion(), 0);
+		attackMock.DidNotReceive().StartAttacking();
+	}
+
+	[Test]
+	[Category("Combat")]
+	public void IfEnemyNoLongerInRangeStopAttackingCalledAndAttackingSetToFalse() {
+		var moveMock = GetMoveMock();
+		var attackMock = GetAttackMock();
+		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		
+		enemyMock.attacking = true;
+		
+		enemyMock.Move (Vector3.zero, new Vector3(2,0,0),2, new Quaternion(), 0);
+		attackMock.Received().StopAttacking();
+	}
+
+	[Test]
+	[Category("Combat")]
+	public void IfEnemyWithinRangeButAttackingOnCooldownAttackingIsNotCalled() {
+		var moveMock = GetMoveMock();
+		var attackMock = GetAttackMock();
+
+		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+
+		enemyMock.isAttackReady().Returns(false);
+
+		enemyMock.AttemptHit(5);
+		attackMock.DidNotReceive().Attack();
 	}
 
 	private IMoveController GetMoveMock () {
@@ -93,8 +133,8 @@ public class EnemyTests  {
 		return Substitute.For<IHitPointsController> ();
 	}
 
-	private IEnemyAttackController GetAttackMock () {
-		return Substitute.For<IEnemyAttackController> ();
+	private IAttackController GetAttackMock () {
+		return Substitute.For<IAttackController> ();
 	}
 	
 	private EnemyController GetEnemyControllerMock (IMoveController move) {
@@ -113,7 +153,7 @@ public class EnemyTests  {
 		return controller;
 	}
 
-	private EnemyController GetEnemyControllerMock (IMoveController move, IEnemyAttackController attack) {
+	private EnemyController GetEnemyControllerMock (IMoveController move, IAttackController attack) {
 		
 		var controller = Substitute.For<EnemyController>();
 		controller.SetMoveController(move);
