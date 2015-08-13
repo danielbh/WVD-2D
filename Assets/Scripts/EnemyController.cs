@@ -6,7 +6,7 @@ public class EnemyController : HumanoidController {
 
 	public IAttackController attackController;
 	public bool attacking = false;
-	private float timeStamp = 0;
+	private float attackCoolDownTime = 0;
 	
 	public void SetAttackController (IAttackController controller) {
 		attackController = controller;
@@ -30,13 +30,18 @@ public class EnemyController : HumanoidController {
 	}
 
 	public void AttemptHit(float coolDownPeriodInSeconds) {
-		if (isAttackReady()) {
+		if (IsAttackReady()) {
 			attackController.Attack();
-			timeStamp = Time.time + coolDownPeriodInSeconds;
+			attackCoolDownTime = CalcAttackCoolDown(coolDownPeriodInSeconds);
 		} 
 	}
 
-	public bool isAttackReady() {
-		return timeStamp <= Time.time;
+	// Virtual so it's mockable for tests
+	virtual public bool IsAttackReady() {
+		return attackCoolDownTime <= Time.time;
+	}
+
+	public float CalcAttackCoolDown(float cdTime) {
+		return Time.time + cdTime;
 	}
 }

@@ -113,16 +113,28 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void IfEnemyWithinRangeButAttackingOnCooldownAttackingIsNotCalled() {
+	public void EnemyAttemptsHitButAttackIsNotReadySoAttackIsNotCalled() {
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 
 		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
 
-		enemyMock.isAttackReady().Returns(false);
-
 		enemyMock.AttemptHit(5);
 		attackMock.DidNotReceive().Attack();
+	}
+
+	[Test]
+	[Category("Combat")]
+	public void EnemyCalculateAttackCoolDownOutputsExpected() {
+		var moveMock = GetMoveMock();
+		var attackMock = GetAttackMock();
+		
+		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+	
+		float actual = enemyMock.CalcAttackCoolDown(5);
+
+		Assert.AreEqual(Time.time + 5, actual);
+
 	}
 
 	private IMoveController GetMoveMock () {
