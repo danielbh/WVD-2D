@@ -40,8 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demon1: {fileID: 106140, guid: caff516158d0e87488b3304f67112376, type: 2}
-  enemiesParent: {fileID: 104268, guid: 0080c7c1186db5444abc9219c4c823f7, type: 2}
-  spawnRate: 2
+  spawnRate: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -53,6 +52,10 @@ Prefab:
       propertyPath: enemiesParent
       value: 
       objectReference: {fileID: 104268, guid: 0080c7c1186db5444abc9219c4c823f7, type: 2}
+    - target: {fileID: 0}
+      propertyPath: spawnRate
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154042}

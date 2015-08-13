@@ -70,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.8836117, y: -.730215073, z: 0}
+  m_LocalPosition: {x: 25.6800003, y: 1.63999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459676}
@@ -82,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.72833109, y: -10.0447645, z: 0}
+  m_LocalPosition: {x: -1.57000005, y: -14.1899996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459676}
@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 122562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.61000013, y: -.880000114, z: 0}
+  m_LocalPosition: {x: -5.5999999, y: 1.26999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459676}
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demon1: {fileID: 106140, guid: caff516158d0e87488b3304f67112376, type: 2}
-  enemiesParent: {fileID: 104268}
   spawnRate: 2
 --- !u!114 &11452986
 MonoBehaviour:
@@ -140,7 +139,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demon1: {fileID: 106140, guid: caff516158d0e87488b3304f67112376, type: 2}
-  enemiesParent: {fileID: 104268}
   spawnRate: 2
 --- !u!114 &11483878
 MonoBehaviour:
@@ -154,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demon1: {fileID: 106140, guid: caff516158d0e87488b3304f67112376, type: 2}
-  enemiesParent: {fileID: 104268}
   spawnRate: 2
 --- !u!1001 &100100000
 Prefab:
