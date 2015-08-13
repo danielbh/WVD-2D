@@ -4,7 +4,6 @@ using System.Collections;
 public class Spawner : MonoBehaviour {
 
 	public GameObject demon1;
-	public GameObject enemiesParent;
 
 	public float spawnRate = 2;
 	// Use this for initialization
