@@ -26,36 +26,31 @@ public class SpawnManager : MonoBehaviour {
 	}
 
 	public void Wave1() {
-		Instantiate(demonMelee, spawners[0].transform.position, Quaternion.identity);
-		Instantiate(demonMelee, spawners[2].transform.position, Quaternion.identity);
-		Instantiate(demonMelee, spawners[4].transform.position, Quaternion.identity);
+		SpawnDemons(new GameObject[] {demonMelee, demonMelee, demonMelee}, new int[] {0,2,4});
 	}
 
 	public void Wave2() {
-		Instantiate(demonMelee, spawners[0].transform.position, Quaternion.identity);
-		Instantiate(demonMelee, spawners[2].transform.position, Quaternion.identity);
-		Instantiate(demonMelee, spawners[4].transform.position, Quaternion.identity);
-
+		SpawnDemons(new GameObject[] {demonMelee, demonMelee, demonMelee}, new int[] {0,2,4});
 		StartCoroutine(SpawnNextSet (3, new GameObject[] {demonMelee, demonMelee, demonMelee}, new int[] {1,3,5}));
 	}
 
 	public void Wave3() {
-		Instantiate(demonMelee, spawners[0].transform.position, Quaternion.identity);
-		Instantiate(demonRanged, spawners[2].transform.position, Quaternion.identity);
-		Instantiate(demonMelee, spawners[4].transform.position, Quaternion.identity);
-
+		SpawnDemons(new GameObject[] {demonMelee, demonRanged, demonMelee}, new int[] {0,2,4});
 		StartCoroutine(SpawnNextSet (3,new GameObject[] {demonMelee, demonRanged, demonRanged}, new int[] {1,3,5}));
 	}
 
-	public IEnumerator SpawnNextSet(float seconds, GameObject[] demons, int[] spawnerIndexes) {
-		yield return new WaitForSeconds(seconds);
 
+	public void SpawnDemons(GameObject[] demons, int[] spawnerIndexes) {
 		int i= 0;
 
 		foreach(GameObject demon in demons) {
 			Instantiate(demon, spawners[spawnerIndexes[i]].transform.position, Quaternion.identity);
 			++i;
 		}
+	}
 
+	public IEnumerator SpawnNextSet(float seconds, GameObject[] demons, int[] spawnerIndexes) {
+		yield return new WaitForSeconds(seconds);
+		SpawnDemons(demons, spawnerIndexes);
 	}
 }

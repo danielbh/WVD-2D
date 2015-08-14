@@ -34,7 +34,7 @@ public class EnemyMelee : MonoBehaviour, IMoveController, IHitPointsController, 
 		controller.ReduceHitPoints(damage, hitPoints);
 	}
 
-	#region IMoveController implementation
+	#region IHitPointsController implementation
 
 	public void ReduceHitPoints(int damage) { hitPoints -= damage; }
 
