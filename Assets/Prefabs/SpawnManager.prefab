@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   demonMelee: {fileID: 106140, guid: caff516158d0e87488b3304f67112376, type: 2}
-  demonRanged: {fileID: 126652, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+  demonRanged: {fileID: 184380, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
   wave: 0
   spawners: []
 --- !u!1001 &100100000

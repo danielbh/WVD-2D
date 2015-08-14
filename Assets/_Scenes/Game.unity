@@ -474,9 +474,9 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11482372, guid: b345b7f985a873544b8d005f884a8dd7, type: 2}
-      propertyPath: demonRanged
-      value: 
-      objectReference: {fileID: 184380, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: wave
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b345b7f985a873544b8d005f884a8dd7, type: 2}
   m_IsPrefabParent: 0
