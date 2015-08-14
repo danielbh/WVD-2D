@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IMoveController, IHitPointsController, IAttackController {
+public class EnemyMelee : MonoBehaviour, IMoveController, IHitPointsController, IMeleeController {
 
 	[HideInInspector]
-	public EnemyController controller;
+	public EnemyMeleeController controller;
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
 	public float attackRate = 5;

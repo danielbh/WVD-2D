@@ -25,13 +25,13 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	public void OnEnable () {
 		controller.SetAttackController (this);
 		controller.SetMoveController (this);
-		fireAimJoystick.FingerTouchedEvent += Attack;
-		fireAimJoystick.FingerLiftedEvent += StopAttacking;
+		fireAimJoystick.FingerTouchedEvent += StartFiring;
+		fireAimJoystick.FingerLiftedEvent += StopFiring;
 	}
 	
 	void OnDisable() {
-		fireAimJoystick.FingerTouchedEvent -= Attack;
-		fireAimJoystick.FingerLiftedEvent -= StopAttacking;
+		fireAimJoystick.FingerTouchedEvent -= StartFiring;
+		fireAimJoystick.FingerLiftedEvent -= StopFiring;
 	}
 	
 	void Update () {
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 		}
 	}
 
-	public  IEnumerator AttackingSequence() {
+	public  IEnumerator FiringSequence() {
 		yield return new WaitForSeconds(0.00001f);
 		
 		for (;;) {
@@ -61,12 +61,12 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	
 	#region IFireController implementation
 
-	public void Attack() {
-		StartCoroutine ("AttackingSequence"); 
+	public void StartFiring() {
+		StartCoroutine ("FiringSequence"); 
 	}
 	
-	public void StopAttacking() {
-		StopCoroutine("AttackingSequence");
+	public void StopFiring() {
+		StopCoroutine("FiringSequence");
 	}
 
 	public void Fire (Vector3 direction) {

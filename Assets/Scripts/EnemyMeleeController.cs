@@ -2,13 +2,13 @@
 using System;
 
 [Serializable]
-public class EnemyController : HumanoidController {
+public class EnemyMeleeController : HumanoidController {
 
-	public IAttackController attackController;
+	public IMeleeController attackController;
 	public bool attacking = false;
 	private float attackCoolDownTime = 0;
 	
-	public void SetAttackController (IAttackController controller) {
+	public void SetAttackController (IMeleeController controller) {
 		attackController = controller;
 	}
 

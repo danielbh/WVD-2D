@@ -4,13 +4,13 @@ using NUnit.Framework;
 using System;
 
 [TestFixture]
-public class EnemyTests  {
+public class EnemyMeleeTests  {
 
 	[Test]
 	[Category("Movement")]
 	public void MoveToPoint() {
 		var moveMock = GetMoveMock();
-		var enemyMock = GetEnemyControllerMock(moveMock, GetAttackMock());
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, GetAttackMock());
 
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(2,0,0);
@@ -23,9 +23,9 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Movement")]
-	public void EnemyNeverGoesUnderWizard() {
+	public void EnemyMeleeNeverGoesUnderWizard() {
 		var moveMock = GetMoveMock();
-		var enemyMock = GetEnemyControllerMock(moveMock, GetAttackMock());
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, GetAttackMock());
 
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = Vector3.right;
@@ -38,9 +38,9 @@ public class EnemyTests  {
 	
 	[Test]
 	[Category("Hitpoints")]
-	public void EnemyLosesHitPoints() {
+	public void EnemyMeleeLosesHitPoints() {
 		var hpMock = GetHitPointsMock();
-		var enemyMock = GetEnemyControllerMock(hpMock);
+		var enemyMock = GetEnemyMeleeControllerMock(hpMock);
 
 		enemyMock.ReduceHitPoints (25, 100);
 
@@ -49,9 +49,9 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Hitpoints")]
-	public void EnemyDiesOnZeroHitPoints() {
+	public void EnemyMeleeDiesOnZeroHitPoints() {
 		var hpMock = GetHitPointsMock();
-		var enemyMock = GetEnemyControllerMock(hpMock);
+		var enemyMock = GetEnemyMeleeControllerMock(hpMock);
 		
 		enemyMock.ReduceHitPoints (25,25);
 		
@@ -61,14 +61,14 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void EnemyAttacksWhenWithinRange() {
+	public void EnemyMeleeAttacksWhenWithinRange() {
 
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
-		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, attackMock);
 
 
-		// Enemy not within range
+		// EnemyMelee not within range
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(2,0,0);
 		float moveSpeed = 2;
@@ -87,10 +87,10 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void IfEnemyAttackingStartAttackingNotCalled() {
+	public void IfEnemyMeleeAttackingStartAttackingNotCalled() {
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
-		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, attackMock);
 
 		enemyMock.attacking = true;
 
@@ -100,10 +100,10 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void IfEnemyNoLongerInRangeStopAttackingCalledAndAttackingSetToFalse() {
+	public void IfEnemyMeleeNoLongerInRangeStopAttackingCalledAndAttackingSetToFalse() {
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
-		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, attackMock);
 		
 		enemyMock.attacking = true;
 		
@@ -113,11 +113,11 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void EnemyAttemptsHitButAttackIsNotReadySoAttackIsNotCalled() {
+	public void EnemyMeleeAttemptsHitButAttackIsNotReadySoAttackIsNotCalled() {
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 
-		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, attackMock);
 
 		enemyMock.AttemptHit(5);
 		attackMock.DidNotReceive().Attack();
@@ -125,11 +125,11 @@ public class EnemyTests  {
 
 	[Test]
 	[Category("Combat")]
-	public void EnemyCalculateAttackCoolDownOutputsExpected() {
+	public void EnemyMeleeCalculateAttackCoolDownOutputsExpected() {
 		var moveMock = GetMoveMock();
 		var attackMock = GetAttackMock();
 		
-		var enemyMock = GetEnemyControllerMock(moveMock, attackMock);
+		var enemyMock = GetEnemyMeleeControllerMock(moveMock, attackMock);
 	
 		float actual = enemyMock.CalcAttackCoolDown(5);
 
@@ -145,29 +145,29 @@ public class EnemyTests  {
 		return Substitute.For<IHitPointsController> ();
 	}
 
-	private IAttackController GetAttackMock () {
-		return Substitute.For<IAttackController> ();
+	private IMeleeController GetAttackMock () {
+		return Substitute.For<IMeleeController> ();
 	}
 	
-	private EnemyController GetEnemyControllerMock (IMoveController move) {
+	private EnemyMeleeController GetEnemyMeleeControllerMock (IMoveController move) {
 		
-		var controller = Substitute.For<EnemyController>();
+		var controller = Substitute.For<EnemyMeleeController>();
 		controller.SetMoveController(move);
 		
 		return controller;
 	}
 
-	private EnemyController GetEnemyControllerMock (IHitPointsController hp) {
+	private EnemyMeleeController GetEnemyMeleeControllerMock (IHitPointsController hp) {
 		
-		var controller = Substitute.For<EnemyController>();
+		var controller = Substitute.For<EnemyMeleeController>();
 		controller.SetHitPointsController(hp);
 		
 		return controller;
 	}
 
-	private EnemyController GetEnemyControllerMock (IMoveController move, IAttackController attack) {
+	private EnemyMeleeController GetEnemyMeleeControllerMock (IMoveController move, IMeleeController attack) {
 		
-		var controller = Substitute.For<EnemyController>();
+		var controller = Substitute.For<EnemyMeleeController>();
 		controller.SetMoveController(move);
 		controller.SetAttackController(attack);
 		

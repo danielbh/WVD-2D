@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour {
 		int enemyLayer = 9;
 
 		if (collider.gameObject.layer == enemyLayer) {
-			Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+			EnemyMelee enemy = collider.gameObject.GetComponent<EnemyMelee>();
 			enemy.Hit(damage);
 			Destroy (this.gameObject);
 		}
