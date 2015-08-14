@@ -141,8 +141,8 @@ public class EnemyMeleeTests  {
 		return Substitute.For<IMoveController> ();
 	}
 
-	private IHitPointsController GetHitPointsMock () {
-		return Substitute.For<IHitPointsController> ();
+	private IDestroyableController GetHitPointsMock () {
+		return Substitute.For<IDestroyableController> ();
 	}
 
 	private IMeleeController GetAttackMock () {
@@ -157,7 +157,7 @@ public class EnemyMeleeTests  {
 		return controller;
 	}
 
-	private EnemyMeleeController GetEnemyMeleeControllerMock (IHitPointsController hp) {
+	private EnemyMeleeController GetEnemyMeleeControllerMock (IDestroyableController hp) {
 		
 		var controller = Substitute.For<EnemyMeleeController>();
 		controller.SetHitPointsController(hp);

@@ -36,7 +36,7 @@ public class HumanoidController {
 
 	public void ReduceHitPoints (int damage, int currentHP) {
 		if (damage >= currentHP) {
-			hpController.Destroy ();
+			// TODO: Game over for player
 		} else {
 			hpController.ReduceHitPoints(damage);
 		}

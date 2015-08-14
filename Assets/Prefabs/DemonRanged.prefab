@@ -54,14 +54,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639b2cc287f76e240ab0dc8dd2f32ec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller:
-    currentFireDirection: {x: 0, y: 0, z: 0}
-    attacking: 0
   moveSpeed: 1
   maxHitPoints: 100
   attackRate: 5
   attackDamage: 25
   hitPoints: 0
+  controller:
+    currentFireDirection: {x: 0, y: 0, z: 0}
+    attacking: 0
 --- !u!212 &21244634
 SpriteRenderer:
   m_ObjectHideFlags: 1
