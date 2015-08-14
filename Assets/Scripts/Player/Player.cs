@@ -54,9 +54,6 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	public void Hit(int damage) {
 		GameObject sprite = Instantiate(damageTakenSprite, transform.position, Quaternion.identity) as GameObject; 
 		sprite.transform.parent = this.gameObject.transform;
-		float spriteLifeTime = 0.5f;
-		Destroy (sprite, spriteLifeTime);
-		// deal damage to Player
 	}
 	
 	#region IFireController implementation
