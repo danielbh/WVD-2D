@@ -16,7 +16,7 @@ public class EnemyMeleeTests  {
 		Vector3 target = new Vector3(2,0,0);
 		float moveSpeed = 2;
 
-		enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
+		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
 		
 		moveMock.Received(1).Move (currentPos, target, moveSpeed * Time.deltaTime);
 	}
@@ -31,7 +31,7 @@ public class EnemyMeleeTests  {
 		Vector3 target = Vector3.right;
 		float moveSpeed = 2;
 		
-		Vector3 expected = enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
+		Vector3 expected = enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
 
 		Assert.AreEqual(expected, currentPos);
 	}
@@ -73,14 +73,14 @@ public class EnemyMeleeTests  {
 		Vector3 target = new Vector3(2,0,0);
 		float moveSpeed = 2;
 
-		enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
+		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
 
 		// verify attack not called
 		attackMock.DidNotReceive().StartAttacking();
 
 		// Make enemy in range
 		target = Vector3.right;
-		enemyMock.Move (currentPos, target,moveSpeed, new Quaternion(), 0);
+		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
 		// Verify attack called
 		attackMock.Received().StartAttacking();
 	}
@@ -94,7 +94,7 @@ public class EnemyMeleeTests  {
 
 		enemyMock.attacking = true;
 
-		enemyMock.Move (Vector3.zero, Vector3.right,2, new Quaternion(), 0);
+		enemyMock.Move (Vector3.zero, Vector3.right,2/*, new Quaternion(), 0*/);
 		attackMock.DidNotReceive().StartAttacking();
 	}
 
@@ -107,7 +107,7 @@ public class EnemyMeleeTests  {
 		
 		enemyMock.attacking = true;
 		
-		enemyMock.Move (Vector3.zero, new Vector3(2,0,0),2, new Quaternion(), 0);
+		enemyMock.Move (Vector3.zero, new Vector3(2,0,0),2/*, new Quaternion(), 0*/);
 		attackMock.Received().StopAttacking();
 	}
 
@@ -149,25 +149,25 @@ public class EnemyMeleeTests  {
 		return Substitute.For<IMeleeController> ();
 	}
 	
-	private EnemyMeleeController GetEnemyMeleeControllerMock (IMoveController move) {
+	private EnemyController GetEnemyMeleeControllerMock (IMoveController move) {
 		
-		var controller = Substitute.For<EnemyMeleeController>();
+		var controller = Substitute.For<EnemyController>();
 		controller.SetMoveController(move);
 		
 		return controller;
 	}
 
-	private EnemyMeleeController GetEnemyMeleeControllerMock (IDestroyableController hp) {
+	private EnemyController GetEnemyMeleeControllerMock (IDestroyableController hp) {
 		
-		var controller = Substitute.For<EnemyMeleeController>();
+		var controller = Substitute.For<EnemyController>();
 		controller.SetHitPointsController(hp);
 		
 		return controller;
 	}
 
-	private EnemyMeleeController GetEnemyMeleeControllerMock (IMoveController move, IMeleeController attack) {
+	private EnemyController GetEnemyMeleeControllerMock (IMoveController move, IMeleeController attack) {
 		
-		var controller = Substitute.For<EnemyMeleeController>();
+		var controller = Substitute.For<EnemyController>();
 		controller.SetMoveController(move);
 		controller.SetAttackController(attack);
 		

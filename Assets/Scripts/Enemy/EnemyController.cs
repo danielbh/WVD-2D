@@ -2,10 +2,11 @@
 using System;
 
 [Serializable]
-public class EnemyMeleeController : HumanoidController {
+public class EnemyController : HumanoidController {
 
 	public IMeleeController attackController;
 	new public IDestroyableController hpController;
+
 	public bool attacking = false;
 	private float attackCoolDownTime = 0;
 	
@@ -17,7 +18,7 @@ public class EnemyMeleeController : HumanoidController {
 		hpController = controller;
 	}
 
-	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed, Quaternion oldRotation, float turnSpeed) {
+	public new Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed/*, Quaternion oldRotation, float turnSpeed*/) {
 		if (Vector3.Distance(currentPos, target) > 1) {
 			if (attacking == true) {
 				attacking = false;

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour, IMoveController, IDestroyableController {
 
+	[HideInInspector]
+	public EnemyController controller;
 	public float moveSpeed = 2;
 	public int maxHitPoints = 100;
 	public float attackRate = 5;
@@ -11,6 +13,26 @@ public class Enemy : MonoBehaviour, IMoveController, IDestroyableController {
 
 	protected Player player;
 
+	public void Start() {
+		player = GameObject.FindObjectOfType<Player>();
+	}
+	
+	virtual public void OnEnable() {
+		controller.SetMoveController (this);
+		controller.SetHitPointsController(this);
+		hitPoints = maxHitPoints;
+	}
+	
+	public void Update() {
+		if (player != null) {
+			transform.position = controller.Move(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
+		}
+	}
+	
+	public void Hit(int damage) {
+		controller.ReduceHitPoints(damage, hitPoints);
+	}
+	
 	#region IMoveController implementation
 	
 	public void FaceDirection(Quaternion newDirection) { }
