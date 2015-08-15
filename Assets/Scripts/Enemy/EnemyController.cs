@@ -6,9 +6,9 @@ public class EnemyController : HumanoidController {
 
 	public IMeleeController attackController;
 	new public IDestroyableController hpController;
-
 	public bool attacking = false;
-	private float attackCoolDownTime = 0;
+
+	protected float attackCoolDownTime = 0;
 	
 	public void SetAttackController (IMeleeController controller) {
 		attackController = controller;
@@ -22,7 +22,7 @@ public class EnemyController : HumanoidController {
 		if (Vector3.Distance(currentPos, target) > 1) {
 			if (attacking == true) {
 				attacking = false;
-				attackController.StopAttacking();
+				attackController.StopAttacking();			
 			}
 			return base.Move(currentPos, target, moveSpeed); 
 		}
@@ -30,10 +30,18 @@ public class EnemyController : HumanoidController {
 		if (attacking == false) {
 			attacking = true;
 			attackController.StartAttacking();
-		} 
 
+		} 
 		return currentPos;
 	}
+
+	// FIXME: Lose test coverage if you do this day 17
+//	virtual public void StartAttacking() {
+//
+//	}
+//
+//	virtual public void StopAttacking() {
+//	}
 
 	public new void ReduceHitPoints (int damage, int currentHP) {
 		if (damage >= currentHP) {
@@ -50,6 +58,10 @@ public class EnemyController : HumanoidController {
 			attackCoolDownTime = CalcAttackCoolDown(coolDownPeriodInSeconds);
 		} 
 	}
+
+	// FIXME: Lose test coverage if you do this
+//	virtual public void Attack() {
+//	}
 
 	// Virtual so it's mockable for tests
 	virtual public bool IsAttackReady() {

@@ -63,7 +63,7 @@ public class PlayerTests
 
 		playerController.ApplyFire(new Quaternion(), 0);
 
-		attackMock.Received(1).Fire(Vector3.right);
+		attackMock.Received(1).Attack(Vector3.right);
 	}
 
 	[Test]

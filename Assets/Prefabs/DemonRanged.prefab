@@ -51,15 +51,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 184380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639b2cc287f76e240ab0dc8dd2f32ec9, type: 3}
+  m_Script: {fileID: 11500000, guid: 266bde4e3d77aaf45a63dbe703c1b332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller:
+    currentFireDirection: {x: 0, y: 0, z: 0}
+    attacking: 0
   moveSpeed: 1
   maxHitPoints: 100
-  attackRate: 5
+  attackRate: 3
   attackDamage: 25
   hitPoints: 0
-  controller:
+  rangedController:
     currentFireDirection: {x: 0, y: 0, z: 0}
     attacking: 0
 --- !u!212 &21244634
@@ -94,7 +97,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: attackRate
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184380}

@@ -13,8 +13,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	public GameObject staff;
 	public GameObject arrow;
 	
-	public float projectileSpeed = 8;
-	public GameObject projectile;
+	public Projectile projectile;
 	public float firingRate= 0.2f;
 	public float turnSpeed = 50;
 	public float moveSpeed= 2 ;
@@ -25,13 +24,13 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	public void OnEnable () {
 		controller.SetAttackController (this);
 		controller.SetMoveController (this);
-		fireAimJoystick.FingerTouchedEvent += StartFiring;
-		fireAimJoystick.FingerLiftedEvent += StopFiring;
+		fireAimJoystick.FingerTouchedEvent += StartAttacking;
+		fireAimJoystick.FingerLiftedEvent += StopAttacking;
 	}
 	
 	void OnDisable() {
-		fireAimJoystick.FingerTouchedEvent -= StartFiring;
-		fireAimJoystick.FingerLiftedEvent -= StopFiring;
+		fireAimJoystick.FingerTouchedEvent -= StartAttacking;
+		fireAimJoystick.FingerLiftedEvent -= StopAttacking;
 	}
 	
 	void Update () {
@@ -42,7 +41,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 		}
 	}
 
-	public  IEnumerator FiringSequence() {
+	public  IEnumerator AttackSequence() {
 		yield return new WaitForSeconds(0.00001f);
 		
 		for (;;) {
@@ -58,17 +57,17 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	
 	#region IFireController implementation
 
-	public void StartFiring() {
-		StartCoroutine ("FiringSequence"); 
+	public void StartAttacking() {
+		StartCoroutine ("AttackSequence"); 
 	}
 	
-	public void StopFiring() {
-		StopCoroutine("FiringSequence");
+	public void StopAttacking() {
+		StopCoroutine("AttackSequence");
 	}
 
-	public void Fire (Vector3 direction) {
-		GameObject beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as GameObject; 
-		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(direction.x * projectileSpeed , direction.y * projectileSpeed,0); 
+	public void Attack (Vector3 direction) {
+		Projectile beam = Instantiate(projectile, staff.transform.position, Quaternion.identity) as Projectile; 
+		beam.Fire(direction);
 	}
 	
 	public Vector3 Aim() {

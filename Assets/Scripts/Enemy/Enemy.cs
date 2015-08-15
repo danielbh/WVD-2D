@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IMoveController, IDestroyableController {
+public class Enemy : MonoBehaviour, IAttackController, IMoveController, IDestroyableController {
 
 	[HideInInspector]
 	public EnemyController controller;
@@ -15,15 +15,15 @@ public class Enemy : MonoBehaviour, IMoveController, IDestroyableController {
 
 	public void Start() {
 		player = GameObject.FindObjectOfType<Player>();
+		hitPoints = maxHitPoints;
 	}
 	
 	virtual public void OnEnable() {
 		controller.SetMoveController (this);
 		controller.SetHitPointsController(this);
-		hitPoints = maxHitPoints;
 	}
 	
-	public void Update() {
+	virtual public void Update() {
 		if (player != null) {
 			transform.position = controller.Move(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
 		}
@@ -52,4 +52,21 @@ public class Enemy : MonoBehaviour, IMoveController, IDestroyableController {
 	public void Destroy() { Destroy (gameObject); }
 	
 	#endregion
+
+	#region IAttackController implementation
+	public void StartAttacking() {
+		StartCoroutine ("AttackSequence"); 
+	}
+	
+	public void StopAttacking() {
+		StopCoroutine("AttackSequence");
+	}
+	#endregion
+
+	public  IEnumerator AttackSequence() {
+		for (;;) {
+			controller.AttemptHit(attackRate);
+			yield return new WaitForSeconds(attackRate);
+		}
+	}	
 }

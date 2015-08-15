@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UnityTest
 {
-    public class TestingFunctions : MonoBehaviour
+    public class CallTest : MonoBehaviour
     {
         public enum Functions
         {

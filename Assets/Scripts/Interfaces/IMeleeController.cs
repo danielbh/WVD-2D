@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-public interface IMeleeController {
+public interface IMeleeController: IAttackController {
 	void Attack();
-	void StopAttacking();
-	void StartAttacking();
 }

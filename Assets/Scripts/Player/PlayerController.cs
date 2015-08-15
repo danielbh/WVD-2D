@@ -27,7 +27,7 @@ public class PlayerController: HumanoidController {
 		}
 
 		// Use class variable if joystick is neutral. This preserves last aimed direction.
-		attackController.Fire(this.currentFireDirection);
+		attackController.Attack(this.currentFireDirection);
 	}
 	
 	public bool FireAimJoystickNeutral() { return GetFireAimAxes() == Vector3.zero; }

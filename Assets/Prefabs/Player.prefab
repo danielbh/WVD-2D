@@ -134,8 +134,7 @@ MonoBehaviour:
   fireAimJoystick: {fileID: 0}
   staff: {fileID: 122304}
   arrow: {fileID: 172676}
-  projectileSpeed: 8
-  projectile: {fileID: 122682, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
+  projectile: {fileID: 11432854, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
   firingRate: .200000003
   turnSpeed: 100
   moveSpeed: 2
@@ -204,6 +203,11 @@ Prefab:
       propertyPath: damageTakenSprite
       value: 
       objectReference: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
+    - target: {fileID: 0}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 11432854, guid: a2892a49f1b80fb45bec1c41e373075c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196614}
