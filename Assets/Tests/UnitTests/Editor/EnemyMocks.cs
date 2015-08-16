@@ -46,5 +46,15 @@ public class EnemyMocks {
 		controller.SetAttackComponent(attack);
 		return controller;
 	}
+
+	public EnemyController GetEnemyRangedControllerMock (IMoveComponent move, IRangedComponent ranged) {
+		
+		var controller = Substitute.For<EnemyController>();
+		controller.SetMoveComponent(move);
+		controller.SetAttackComponent(ranged);
+		controller.SetAttackComponent(GetAttackMock());
+		controller.SetAttackComponent(GetMeleeMock());
+		return controller;
+	}
 }
 
