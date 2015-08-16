@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IAttackComponent, IMoveComponent {
 	
 	virtual public void OnEnable() {
 		controller.SetMoveComponent (this);
+		controller.SetAttackComponent(this);
 	}
 	
 	virtual public void Update() {

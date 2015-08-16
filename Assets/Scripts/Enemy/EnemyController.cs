@@ -4,21 +4,30 @@ using System;
 [Serializable]
 public class EnemyController : HumanoidController {
 
-	public IMeleeComponent attackComponent;
+	public IAttackComponent attackComponent;
+	public IMeleeComponent meleeComponent;
+	public IRangedComponent rangedAttackComponent;
 	public bool attacking = false;
 
 	protected float attackCoolDownTime = 0;
 	
 	public void SetAttackComponent (IMeleeComponent component) {
-		attackComponent = component;
+		meleeComponent = component;
 	}
 
+	public void SetAttackComponent (IRangedComponent component) {
+		rangedAttackComponent = component;
+	}
 
+	public void SetAttackComponent (IAttackComponent component) {
+		attackComponent = component;
+	}
+	
 	public new Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed/*, Quaternion oldRotation, float turnSpeed*/) {
 		if (Vector3.Distance(currentPos, target) > 1) {
 			if (attacking == true) {
 				attacking = false;
-				attackComponent.StopAttacking();			
+				attackComponent.StopAttacking();
 			}
 			return base.Move(currentPos, target, moveSpeed); 
 		}
@@ -26,22 +35,17 @@ public class EnemyController : HumanoidController {
 		if (attacking == false) {
 			attacking = true;
 			attackComponent.StartAttacking();
-
 		} 
 		return currentPos;
 	}
 
-	// FIXME: Lose test coverage if you do this day 17
-//	virtual public void StartAttacking() {
-//
-//	}
-//
-//	virtual public void StopAttacking() {
-//	}
-
 	public void AttemptHit(float coolDownPeriodInSeconds) {
 		if (IsAttackReady()) {
-			attackComponent.Attack();
+			if (rangedAttackComponent == null) {
+				meleeComponent.Attack();
+			} else {
+				rangedAttackComponent.Attack(Vector3.right);
+			}
 			attackCoolDownTime = CalcAttackCoolDown(coolDownPeriodInSeconds);
 		} 
 	}

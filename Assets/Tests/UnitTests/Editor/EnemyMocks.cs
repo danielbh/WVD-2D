@@ -9,8 +9,16 @@ public class EnemyMocks {
 		return Substitute.For<IMoveComponent> ();
 	}
 	
-	public IMeleeComponent GetAttackMock () {
+	public IMeleeComponent GetMeleeMock () {
 		return Substitute.For<IMeleeComponent> ();
+	}
+
+	public IAttackComponent GetAttackMock () {
+		return Substitute.For<IAttackComponent> ();
+	}
+
+	public IRangedComponent GetRangedMock () {
+		return Substitute.For<IRangedComponent> ();
 	}
 	
 	public EnemyController GetEnemyMeleeComponentMock (IMoveComponent move) {
@@ -22,12 +30,20 @@ public class EnemyMocks {
 	}
 
 	
-	public EnemyController GetEnemyMeleeControllerMock (IMoveComponent move, IMeleeComponent attack) {
+	public EnemyController GetEnemyMeleeControllerMock (IMoveComponent move, IMeleeComponent melee) {
+		
+		var controller = Substitute.For<EnemyController>();
+		controller.SetMoveComponent(move);
+		controller.SetAttackComponent(melee);
+		
+		return controller;
+	}
+
+	public EnemyController GetEnemyMeleeControllerMock (IMoveComponent move, IAttackComponent attack) {
 		
 		var controller = Substitute.For<EnemyController>();
 		controller.SetMoveComponent(move);
 		controller.SetAttackComponent(attack);
-		
 		return controller;
 	}
 }

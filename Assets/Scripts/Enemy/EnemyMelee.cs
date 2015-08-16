@@ -4,8 +4,8 @@ using System.Collections;
 public class EnemyMelee : Enemy, IMeleeComponent {
 
 	override public void OnEnable() {
-		base.OnEnable();
 		controller.SetAttackComponent(this);
+		base.OnEnable();
 	}
 
 	#region IEnemyMeleeComponent implementation

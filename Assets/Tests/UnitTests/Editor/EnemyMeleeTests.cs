@@ -16,7 +16,7 @@ public class EnemyMeleeTests  {
 	[Category("Movement")]
 	public void MoveToPoint() {
 		var moveMock = mocks.GetMoveMock();
-		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, mocks.GetAttackMock());
+		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, mocks.GetMeleeMock());
 
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(2,0,0);
@@ -73,7 +73,7 @@ public class EnemyMeleeTests  {
 	[Category("Combat")]
 	public void IfEnemyMeleeAttackingStartAttackingNotCalled() {
 		var moveMock = mocks.GetMoveMock();
-		var attackMock = mocks.GetAttackMock();
+		var attackMock = mocks.GetMeleeMock();
 		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, attackMock);
 
 		enemyMock.attacking = true;
@@ -99,7 +99,7 @@ public class EnemyMeleeTests  {
 	[Category("Combat")]
 	public void EnemyMeleeAttemptsHitButAttackIsNotReadySoAttackIsNotCalled() {
 		var moveMock = mocks.GetMoveMock();
-		var attackMock = mocks.GetAttackMock();
+		var attackMock = mocks.GetMeleeMock();
 
 		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, attackMock);
 
@@ -113,7 +113,7 @@ public class EnemyMeleeTests  {
 	[Category("Combat")]
 	public void EnemyMeleeAttemptsHitAndAttackIsReadySoAttackIsCalled() {
 		var moveMock = mocks.GetMoveMock();
-		var attackMock = mocks.GetAttackMock();
+		var attackMock = mocks.GetMeleeMock();
 		
 		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, attackMock);
 
@@ -126,7 +126,7 @@ public class EnemyMeleeTests  {
 	[Category("Combat")]
 	public void EnemyMeleeCalculateAttackCoolDownOutputsExpected() {
 		var moveMock = mocks.GetMoveMock();
-		var attackMock = mocks.GetAttackMock();
+		var attackMock = mocks.GetMeleeMock();
 		
 		var enemyMock = mocks.GetEnemyMeleeControllerMock(moveMock, attackMock);
 	
