@@ -12,8 +12,8 @@ GameObject:
   - 114: {fileID: 11432854}
   - 50: {fileID: 5035128}
   - 61: {fileID: 6165114}
-  m_Layer: 10
-  m_Name: Magic Missile
+  m_Layer: 12
+  m_Name: Demonic Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,9 +73,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   speed: 8
-  collidesWith:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!212 &21231190
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -101,7 +98,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300106, guid: 48780ccb7299c7f4d9457bbd53b643f5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .95588237, g: .0351427123, b: .0351427123, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -122,16 +119,24 @@ Prefab:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 0}
-      propertyPath: colliderLayer.m_Bits
-      value: 512
+      propertyPath: m_Color.g
+      value: .0351427123
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.b
+      value: .0351427123
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Color.r
+      value: .95588237
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: collidesWith.m_Bits
-      value: 512
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

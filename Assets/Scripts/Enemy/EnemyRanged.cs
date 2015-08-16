@@ -3,14 +3,20 @@ using System.Collections;
 
 public class EnemyRanged : Enemy, IRangedComponent {	
 
+	public Projectile projectile;
+	
 	override public void OnEnable() {
 		controller.SetAttackComponent(this);
 		base.OnEnable();
 	}
-
-
+	
 	public void Attack(Vector3 direction) {
-		print ("Enemy Ranged has attacked");
+		Projectile beam = Instantiate(projectile, transform.position, Quaternion.identity) as Projectile; 
+		beam.Fire(direction);
 	}
-	public Vector3 Aim() {return Vector3.zero;}
+	public Vector3 Aim() {
+		Vector3 target = player.transform.position;
+		target.Normalize();
+		return target;
+	}
 }

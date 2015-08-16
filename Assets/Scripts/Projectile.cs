@@ -11,12 +11,9 @@ public class Projectile : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D collider) {
-		int enemyLayer = 9;
-
-		if (collider.gameObject.layer == enemyLayer) {
-			HitPoints enemy = collider.gameObject.GetComponent<HitPoints>();
-			// Destroyable enemy = collider.gameObject.GetComponent<Destroyable>();
-			enemy.Hit(damage);
+		HitPoints hpComponent = collider.gameObject.GetComponent<HitPoints>();
+		if (hpComponent != null) {
+			hpComponent.Hit(damage);
 			Destroy (this.gameObject);
 		}
 	}	

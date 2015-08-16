@@ -175,6 +175,52 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 494978, guid: caff516158d0e87488b3304f67112376, type: 2}
   m_PrefabInternal: {fileID: 171098839}
+--- !u!1001 &288558829
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1280685526}
+    m_Modifications:
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.73000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.01000023
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &288558830 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 420024, guid: 76673f48f53c9a846a54fd0aa79da482, type: 2}
+  m_PrefabInternal: {fileID: 288558829}
 --- !u!1 &532738945 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 124624, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
@@ -403,7 +449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &811147827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,6 +689,113 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: 2
+  ignored: 0
+  succeedAfterAllAssertionsAreExecuted: 0
+  expectException: 0
+  expectedExceptionList: 
+  succeedWhenExceptionIsThrown: 0
+  includedPlatforms: -1
+  platformsToIgnore: []
+  dynamic: 0
+  dynamicTypeName: 
+--- !u!1001 &1245057616
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1280685526}
+    m_Modifications:
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.61999989
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.23000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415138, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: moveJoystick
+      value: 
+      objectReference: {fileID: 11493238, guid: 9dc32a163282d6341bb6831c84bf54a8,
+        type: 2}
+    - target: {fileID: 11415138, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+      propertyPath: fireAimJoystick
+      value: 
+      objectReference: {fileID: 11454658, guid: 9dc32a163282d6341bb6831c84bf54a8,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1245057617 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 407532, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
+  m_PrefabInternal: {fileID: 1245057616}
+--- !u!1 &1280685525
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1280685526}
+  - 114: {fileID: 1280685527}
+  m_Layer: 0
+  m_Name: DemonRanged Fires Projectile That Hits Wizard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1280685526
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1280685525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 288558830}
+  - {fileID: 1245057617}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!114 &1280685527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1280685525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1dba0b27b0864740a8720e920aa88c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeout: 5
   ignored: 0
   succeedAfterAllAssertionsAreExecuted: 0
   expectException: 0

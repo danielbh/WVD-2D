@@ -245,11 +245,11 @@ Prefab:
     - target: {fileID: 11415138, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
       propertyPath: moveJoystick
       value: 
-      objectReference: {fileID: 1410167130}
+      objectReference: {fileID: 1472475253}
     - target: {fileID: 11415138, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
       propertyPath: fireAimJoystick
       value: 
-      objectReference: {fileID: 1974599853}
+      objectReference: {fileID: 2024458885}
     - target: {fileID: 11417040, guid: 7901ee0b4bad64242a8c7ea573c6a6b3, type: 2}
       propertyPath: hitPoints
       value: 100
@@ -298,7 +298,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11482372, guid: b345b7f985a873544b8d005f884a8dd7, type: 2}
       propertyPath: wave
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b345b7f985a873544b8d005f884a8dd7, type: 2}
@@ -353,15 +353,15 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9dc32a163282d6341bb6831c84bf54a8, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1410167130 stripped
+--- !u!114 &1472475253 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11477280, guid: 9dc32a163282d6341bb6831c84bf54a8,
+  m_PrefabParentObject: {fileID: 11493238, guid: 9dc32a163282d6341bb6831c84bf54a8,
     type: 2}
   m_PrefabInternal: {fileID: 1148743177}
   m_Script: {fileID: 11500000, guid: ed91a055bc3f60a46a64e83aee3676ba, type: 3}
---- !u!114 &1974599853 stripped
+--- !u!114 &2024458885 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11482200, guid: 9dc32a163282d6341bb6831c84bf54a8,
+  m_PrefabParentObject: {fileID: 11454658, guid: 9dc32a163282d6341bb6831c84bf54a8,
     type: 2}
   m_PrefabInternal: {fileID: 1148743177}
   m_Script: {fileID: 11500000, guid: ed91a055bc3f60a46a64e83aee3676ba, type: 3}

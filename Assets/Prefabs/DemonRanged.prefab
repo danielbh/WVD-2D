@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 420024}
   - 212: {fileID: 21244634}
   - 114: {fileID: 11440652}
-  - 61: {fileID: 6140906}
   - 114: {fileID: 11405936}
+  - 61: {fileID: 6140906}
   m_Layer: 9
   m_Name: DemonRanged
   m_TagString: Enemy
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8900001, y: 7.42000008, z: 0}
+  m_LocalPosition: {x: 2.73000002, y: 5.01000023, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,6 +77,7 @@ MonoBehaviour:
   attackDamage: 25
   minDistanceFromPlayer: 5
   maxAttackDistanceFromPlayer: 10
+  projectile: {fileID: 11432854, guid: a5037fabb9b8d49449841cda375aa2e2, type: 2}
 --- !u!212 &21244634
 SpriteRenderer:
   m_ObjectHideFlags: 1

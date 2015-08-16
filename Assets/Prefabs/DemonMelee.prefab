@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 494978}
   - 212: {fileID: 21282128}
   - 114: {fileID: 11460042}
-  - 61: {fileID: 6115482}
   - 114: {fileID: 11426994}
+  - 61: {fileID: 6115482}
   m_Layer: 9
   m_Name: DemonMelee
   m_TagString: Enemy
