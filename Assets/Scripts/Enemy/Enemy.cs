@@ -8,6 +8,8 @@ public class Enemy : MonoBehaviour, IAttackComponent, IMoveComponent {
 	public float moveSpeed = 2;
 	public float attackRate = 5;
 	public int attackDamage = 25;
+	public int minDistanceFromPlayer = 2;
+	public int maxAttackDistanceFromPlayer = 2;
 	
 	protected Player player;
 
@@ -20,9 +22,10 @@ public class Enemy : MonoBehaviour, IAttackComponent, IMoveComponent {
 		controller.SetAttackComponent(this);
 	}
 	
-	virtual public void Update() {
+	public void Update() {
 		if (player != null) {
-			transform.position = controller.Move(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
+			transform.position = controller.Move(transform.position, player.transform.position, moveSpeed, minDistanceFromPlayer);
+			controller.HandleAttacks(transform.position, player.transform.position, maxAttackDistanceFromPlayer);
 		}
 	}
 

@@ -75,9 +75,8 @@ MonoBehaviour:
   moveSpeed: 1
   attackRate: 3
   attackDamage: 25
-  rangedComponent:
-    currentFireDirection: {x: 0, y: 0, z: 0}
-    attacking: 0
+  minDistanceFromPlayer: 5
+  maxAttackDistanceFromPlayer: 10
 --- !u!212 &21244634
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -122,6 +121,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: hitPoints
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minDistanceFromPlayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxAttackDistanceFromPlayer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -22,53 +22,37 @@ public class EnemyController : HumanoidController {
 	public void SetAttackComponent (IAttackComponent component) {
 		attackComponent = component;
 	}
+	
+	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed, float minDistFromPlayer) {
+		if (DistanceGreaterThan(minDistFromPlayer, currentPos, target)) {
+			return base.Move(currentPos, target, moveSpeed); 
+		}
+		return currentPos;
+	}
 
+	public void HandleAttacks(Vector3 currentPos, Vector3 target, float maxAttackDist) {
 
-	public Vector3 MoveAsRanged (Vector3 currentPos, Vector3 target, float moveSpeed) {
-
-		int minDistFromPlayer = 5;
-		int maxAttackDist = 10;
-
-		if (!DistanceGreater (maxAttackDist, currentPos, target)) {
+		if (DistanceGreaterThan (maxAttackDist, currentPos, target)) {
+			if (attacking == true) {
+				attacking = false;
+				attackComponent.StopAttacking();
+			}
+		} else {
 			if (attacking == false) {
 				attacking = true;
 				attackComponent.StartAttacking();
 			} 
-		} else if (DistanceGreater(maxAttackDist + 1, currentPos, target)) {
-			if (attacking == true) {
-				attacking = false;
-				attackComponent.StopAttacking();
-			}
 		}
-		
-		if (!DistanceGreater(minDistFromPlayer, currentPos, target)) {
-			return currentPos;
-		}
-		
-		return base.Move(currentPos, target, moveSpeed); 
-	}
-	
-	public new Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
-
-		if (DistanceGreater(1,currentPos, target)) {
-			if (attacking == true) {
-				attacking = false;
-				attackComponent.StopAttacking();
-			}
-			return base.Move(currentPos, target, moveSpeed); 
-		}
-
-		if (attacking == false) {
-			attacking = true;
-			attackComponent.StartAttacking();
-		} 
-		return currentPos;
 	}
 
-	private bool DistanceGreater(int units, Vector3 currentPos, Vector3 target) {
+	private bool DistanceGreaterThan(float units, Vector3 currentPos, Vector3 target) {
 		return Vector3.Distance(currentPos, target) > units;
 	}
 
+	private bool DistanceLessThan(float units, Vector3 currentPos, Vector3 target) {
+		return Vector3.Distance(currentPos, target) < units;
+	}
+	
 	public void AttemptHit(float coolDownPeriodInSeconds) {
 		if (IsAttackReady()) {
 			if (rangedAttackComponent == null) {

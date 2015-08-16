@@ -22,7 +22,7 @@ public class EnemyMeleeTests  {
 		Vector3 target = new Vector3(2,0,0);
 		float moveSpeed = 2;
 
-		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
+		enemyMock.Move (currentPos, target,moveSpeed);
 		
 		moveMock.Received(1).Move (currentPos, target, moveSpeed * Time.deltaTime);
 	}
@@ -37,7 +37,7 @@ public class EnemyMeleeTests  {
 		Vector3 target = Vector3.right;
 		float moveSpeed = 2;
 		
-		Vector3 expected = enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
+		Vector3 expected = enemyMock.Move (currentPos, target,moveSpeed, 1);
 
 		Assert.AreEqual(expected, currentPos);
 	}
@@ -55,16 +55,15 @@ public class EnemyMeleeTests  {
 		// EnemyMelee not within range
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(2,0,0);
-		float moveSpeed = 2;
 
-		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
+		enemyMock.HandleAttacks (currentPos, target, 1);
 
 		// verify attack not called
 		attackMock.DidNotReceive().StartAttacking();
 
 		// Make enemy in range
 		target = Vector3.right;
-		enemyMock.Move (currentPos, target,moveSpeed/*, new Quaternion(), 0*/);
+		enemyMock.HandleAttacks (currentPos, target, 1);
 		// Verify attack called
 		attackMock.Received().StartAttacking();
 	}
@@ -78,7 +77,7 @@ public class EnemyMeleeTests  {
 
 		enemyMock.attacking = true;
 
-		enemyMock.Move (Vector3.zero, Vector3.right,2/*, new Quaternion(), 0*/);
+		enemyMock.HandleAttacks (Vector3.zero, Vector3.right,1);
 		attackMock.DidNotReceive().StartAttacking();
 	}
 
@@ -91,7 +90,7 @@ public class EnemyMeleeTests  {
 		
 		enemyMock.attacking = true;
 		
-		enemyMock.Move (Vector3.zero, new Vector3(2,0,0),2/*, new Quaternion(), 0*/);
+		enemyMock.HandleAttacks (Vector3.zero, new Vector3(2,0,0),1);
 		attackMock.Received().StopAttacking();
 	}
 

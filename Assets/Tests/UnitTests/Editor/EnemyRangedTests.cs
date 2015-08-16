@@ -20,9 +20,8 @@ public class EnemyRangedTests  {
 
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(11,0,0);
-		float moveSpeed = 2;
-		
-		enemyMock.MoveAsRanged(currentPos, target,moveSpeed);
+
+		enemyMock.HandleAttacks(currentPos, target, 10);
 
 		enemyMock.attackComponent.DidNotReceive().StartAttacking();
 	}
@@ -35,11 +34,10 @@ public class EnemyRangedTests  {
 		
 		Vector3 currentPos = Vector3.zero;
 		Vector3 target = new Vector3(10,0,0);
-		float moveSpeed = 2;
 
 		Assert.IsNotNull(enemyMock.rangedAttackComponent);
 		
-		enemyMock.MoveAsRanged (currentPos, target,moveSpeed);
+		enemyMock.HandleAttacks(currentPos, target, 10);
 		
 		enemyMock.attackComponent.Received(1).StartAttacking();
 	}
@@ -65,10 +63,10 @@ public class EnemyRangedTests  {
 		var enemyMock = mocks.GetEnemyRangedControllerMock(moveMock, mocks.GetRangedMock());
 		
 		Vector3 currentPos = Vector3.zero;
-		Vector3 target = new Vector3(5,0,0);
+		Vector3 target = new Vector3(4,0,0);
 		float moveSpeed = 2;
 		
-		enemyMock.MoveAsRanged(currentPos, target,moveSpeed);
+		enemyMock.Move(currentPos, target,moveSpeed, 5);
 		
 		moveMock.DidNotReceive().Move (currentPos, target, moveSpeed * Time.deltaTime);
 	}

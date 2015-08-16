@@ -8,13 +8,6 @@ public class EnemyRanged : Enemy, IRangedComponent {
 		base.OnEnable();
 	}
 
-	//TODO: Attack when within range
-	override public void Update() {
-		if (player != null) {
-			transform.position = controller.MoveAsRanged(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
-		}
-	}
-	
 
 	public void Attack(Vector3 direction) {
 		print ("Enemy Ranged has attacked");
