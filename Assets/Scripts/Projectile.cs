@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour {
 
-	public int damage = 20;
+	public int damage = 25;
 	public float speed = 8;
 
 	public void Fire(Vector3 direction) { 
@@ -14,7 +14,8 @@ public class Projectile : MonoBehaviour {
 		int enemyLayer = 9;
 
 		if (collider.gameObject.layer == enemyLayer) {
-			Enemy enemy = collider.gameObject.GetComponent<Enemy>();
+			HitPoints enemy = collider.gameObject.GetComponent<HitPoints>();
+			// Destroyable enemy = collider.gameObject.GetComponent<Destroyable>();
 			enemy.Hit(damage);
 			Destroy (this.gameObject);
 		}

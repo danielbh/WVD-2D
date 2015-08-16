@@ -5,7 +5,6 @@ using System;
 public class EnemyController : HumanoidController {
 
 	public IMeleeController attackController;
-	new public IDestroyableController hpController;
 	public bool attacking = false;
 
 	protected float attackCoolDownTime = 0;
@@ -14,9 +13,6 @@ public class EnemyController : HumanoidController {
 		attackController = controller;
 	}
 
-	public void SetHitPointsController (IDestroyableController controller) {
-		hpController = controller;
-	}
 
 	public new Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed/*, Quaternion oldRotation, float turnSpeed*/) {
 		if (Vector3.Distance(currentPos, target) > 1) {
@@ -43,15 +39,6 @@ public class EnemyController : HumanoidController {
 //	virtual public void StopAttacking() {
 //	}
 
-	public new void ReduceHitPoints (int damage, int currentHP) {
-		if (damage >= currentHP) {
-			// Game over for player
-			hpController.Destroy ();
-		} else {
-			hpController.ReduceHitPoints(damage);
-		}
-	}
-	
 	public void AttemptHit(float coolDownPeriodInSeconds) {
 		if (IsAttackReady()) {
 			attackController.Attack();

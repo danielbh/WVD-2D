@@ -10,7 +10,7 @@ public class EnemyMelee : Enemy, IMeleeController {
 
 	#region IEnemyMeleeController implementation
 	public void Attack() {
-		player.Hit (attackDamage);
+		player.GetComponent<HitPoints>().Hit(attackDamage);
 	}
 	#endregion
 

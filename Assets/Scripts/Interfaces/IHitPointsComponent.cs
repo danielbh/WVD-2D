@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IHitPointsController {
+public interface IHitPointsComponent {
 	void ReduceHitPoints(int damage);
+	void Destroy();
 }

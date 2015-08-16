@@ -42,28 +42,7 @@ public class EnemyMeleeTests  {
 		Assert.AreEqual(expected, currentPos);
 	}
 	
-	[Test]
-	[Category("Hitpoints")]
-	public void EnemyMeleeLosesHitPoints() {
-		var hpMock = mocks.GetHitPointsMock();
-		var enemyMock = mocks.GetEnemyMeleeControllerMock(hpMock);
 
-		enemyMock.ReduceHitPoints (25, 100);
-
-		hpMock.Received(1).ReduceHitPoints(25);
-	}
-
-	[Test]
-	[Category("Hitpoints")]
-	public void EnemyMeleeDiesOnZeroHitPoints() {
-		var hpMock = mocks.GetHitPointsMock();
-		var enemyMock = mocks.GetEnemyMeleeControllerMock(hpMock);
-		
-		enemyMock.ReduceHitPoints (25,25);
-		
-		hpMock.DidNotReceive().ReduceHitPoints(25);
-		hpMock.Received(1).Destroy();
-	}
 
 	[Test]
 	[Category("Combat")]

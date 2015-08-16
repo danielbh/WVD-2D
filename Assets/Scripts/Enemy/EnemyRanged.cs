@@ -8,7 +8,6 @@ public class EnemyRanged : Enemy, IRangedController {
 
 	override public void OnEnable() {
 		rangedController.SetMoveController (this);
-		rangedController.SetHitPointsController(this);
 		rangedController.SetAttackController(this);
 	}
 
@@ -22,10 +21,6 @@ public class EnemyRanged : Enemy, IRangedController {
 		print ("Enemy Ranged has attacked");
 	}
 	public Vector3 Aim() {return Vector3.zero;}
-
-	new public void Hit(int damage) {
-		rangedController.ReduceHitPoints(damage, hitPoints);
-	}
 
 	new public  IEnumerator AttackSequence() {
 		for (;;) {
