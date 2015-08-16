@@ -6,10 +6,10 @@ using System;
 [Serializable]
 public class PlayerController: HumanoidController {
 	
-	public IRangedController attackController;
+	public IRangedComponent attackComponent;
 	
-	public void SetAttackController (IRangedController controller) {
-		attackController = controller;
+	public void SetAttackComponent (IRangedComponent component) {
+		attackComponent = component;
 	}
 	
 	public void ApplyFire(Quaternion oldFireDirection, float turnSpeed) {
@@ -27,12 +27,12 @@ public class PlayerController: HumanoidController {
 		}
 
 		// Use class variable if joystick is neutral. This preserves last aimed direction.
-		attackController.Attack(this.currentFireDirection);
+		attackComponent.Attack(this.currentFireDirection);
 	}
 	
 	public bool FireAimJoystickNeutral() { return GetFireAimAxes() == Vector3.zero; }
 
-	public Vector3 GetFireAimAxes() { return attackController.Aim(); }
+	public Vector3 GetFireAimAxes() { return attackComponent.Aim(); }
 	
 	public Vector3 Move (Vector3 currentPos, Vector3 moveDirection, float moveSpeed, Quaternion oldRotation, float turnSpeed) {
 

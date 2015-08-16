@@ -4,15 +4,15 @@ using System;
 [Serializable]
 public class HumanoidController {
 
-	public IMoveController moveController;
+	public IMoveComponent moveComponent;
 	public Vector3 currentFireDirection;
 
-	public void SetMoveController (IMoveController controller) {
-		moveController = controller;
+	public void SetMoveComponent (IMoveComponent component) {
+		moveComponent = component;
 	}
 
 	public Vector3 Move (Vector3 currentPos, Vector3 target, float moveSpeed) {
-		return moveController.Move (currentPos, target, moveSpeed * Time.deltaTime); 
+		return moveComponent.Move (currentPos, target, moveSpeed * Time.deltaTime); 
 	}
 	
 	public void FaceDirection(Vector3 newDirection, Quaternion oldRotation, float turnSpeed) { 
@@ -26,6 +26,6 @@ public class HumanoidController {
 		// Rotate player in new direction
 		var newRotation = Quaternion.Slerp(oldRotation, Quaternion.Euler( 0, 0, targetAngle ), turnSpeed * Time.deltaTime );
 		
-		moveController.FaceDirection(newRotation);
+		moveComponent.FaceDirection(newRotation);
 	}
 }

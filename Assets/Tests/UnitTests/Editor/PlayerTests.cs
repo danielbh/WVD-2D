@@ -138,33 +138,33 @@ public class PlayerTests
 		moveMock.DidNotReceive().FaceDirection(new Quaternion());
 	}
 	
-	private IRangedController GetAttackMock () {
-		return Substitute.For<IRangedController> ();
+	private IRangedComponent GetAttackMock () {
+		return Substitute.For<IRangedComponent> ();
 	}
 	
-	private IMoveController GetMoveMock () {
-		return Substitute.For<IMoveController> ();
+	private IMoveComponent GetMoveMock () {
+		return Substitute.For<IMoveComponent> ();
 	}
 
-	private PlayerController GetPlayerControllerMock (IRangedController attack) {
+	private PlayerController GetPlayerControllerMock (IRangedComponent attack) {
 		var playerController = Substitute.For<PlayerController>();
-		playerController.SetAttackController(attack);
+		playerController.SetAttackComponent(attack);
 		return playerController;
 	}
 
-	private PlayerController GetPlayerControllerMock (IMoveController move) {
+	private PlayerController GetPlayerControllerMock (IMoveComponent move) {
 		
 		var playerController = Substitute.For<PlayerController>();
-		playerController.SetMoveController(move);
+		playerController.SetMoveComponent(move);
 		
 		return playerController;
 	}
 
-	private PlayerController GetPlayerControllerMock (IMoveController move, IRangedController attack) {
+	private PlayerController GetPlayerControllerMock (IMoveComponent move, IRangedComponent attack) {
 		
 		var playerController = Substitute.For<PlayerController>();
-		playerController.SetMoveController(move);
-		playerController.SetAttackController(attack);
+		playerController.SetMoveComponent(move);
+		playerController.SetAttackComponent(attack);
 		return playerController;
 	}
 }

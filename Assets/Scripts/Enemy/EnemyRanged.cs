@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyRanged : Enemy, IRangedController {	
+public class EnemyRanged : Enemy, IRangedComponent {	
 
 	[HideInInspector]
-	public EnemyRangedController rangedController;
+	public EnemyRangedController rangedComponent;
 
 	override public void OnEnable() {
-		rangedController.SetMoveController (this);
-		rangedController.SetAttackController(this);
+		rangedComponent.SetMoveComponent (this);
+		rangedComponent.SetAttackComponent(this);
 	}
 
 	override public void Update() {
 		if (player != null) {
-			transform.position = rangedController.Move(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
+			transform.position = rangedComponent.Move(transform.position, player.transform.position, moveSpeed/*, new Quaternion(), 0*/);
 		}
 	}
 	
@@ -24,7 +24,7 @@ public class EnemyRanged : Enemy, IRangedController {
 
 	new public  IEnumerator AttackSequence() {
 		for (;;) {
-			rangedController.AttemptHit(attackRate);
+			rangedComponent.AttemptHit(attackRate);
 			yield return new WaitForSeconds(attackRate);
 		}
 	}

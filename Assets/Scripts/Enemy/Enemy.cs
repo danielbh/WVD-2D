@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Enemy : MonoBehaviour, IAttackController, IMoveController {
+public class Enemy : MonoBehaviour, IAttackComponent, IMoveComponent {
 
 	[HideInInspector]
 	public EnemyController controller;
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour, IAttackController, IMoveController {
 	}
 	
 	virtual public void OnEnable() {
-		controller.SetMoveController (this);
+		controller.SetMoveComponent (this);
 	}
 	
 	virtual public void Update() {
@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, IAttackController, IMoveController {
 		}
 	}
 
-	#region IMoveController implementation
+	#region IMoveComponent implementation
 	
 	public void FaceDirection(Quaternion newDirection) { }
 	
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour, IAttackController, IMoveController {
 	
 	#endregion
 
-	#region IAttackController implementation
+	#region IAttackComponent implementation
 	public void StartAttacking() {
 		StartCoroutine ("AttackSequence"); 
 	}

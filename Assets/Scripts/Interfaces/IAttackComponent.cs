@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public interface IAttackController {
+public interface IAttackComponent {
 	void StopAttacking();
 	void StartAttacking();
 }

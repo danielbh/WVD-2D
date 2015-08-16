@@ -56,8 +56,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTakenSprite: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
-  maxHitPoints: 100
-  hitPoints: 0
+  hitPoints: 100
+  invulnerable: 0
 --- !u!114 &11440652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,7 +75,7 @@ MonoBehaviour:
   moveSpeed: 1
   attackRate: 3
   attackDamage: 25
-  rangedController:
+  rangedComponent:
     currentFireDirection: {x: 0, y: 0, z: 0}
     attacking: 0
 --- !u!212 &21244634
@@ -119,6 +119,10 @@ Prefab:
       propertyPath: damageTakenSprite
       value: 
       objectReference: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
+    - target: {fileID: 0}
+      propertyPath: hitPoints
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 184380}

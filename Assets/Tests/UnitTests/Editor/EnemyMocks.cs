@@ -5,28 +5,28 @@ using System;
 
 public class EnemyMocks {
 
-	public IMoveController GetMoveMock () {
-		return Substitute.For<IMoveController> ();
+	public IMoveComponent GetMoveMock () {
+		return Substitute.For<IMoveComponent> ();
 	}
 	
-	public IMeleeController GetAttackMock () {
-		return Substitute.For<IMeleeController> ();
+	public IMeleeComponent GetAttackMock () {
+		return Substitute.For<IMeleeComponent> ();
 	}
 	
-	public EnemyController GetEnemyMeleeControllerMock (IMoveController move) {
+	public EnemyController GetEnemyMeleeComponentMock (IMoveComponent move) {
 		
 		var controller = Substitute.For<EnemyController>();
-		controller.SetMoveController(move);
+		controller.SetMoveComponent(move);
 		
 		return controller;
 	}
 
 	
-	public EnemyController GetEnemyMeleeControllerMock (IMoveController move, IMeleeController attack) {
+	public EnemyController GetEnemyMeleeControllerMock (IMoveComponent move, IMeleeComponent attack) {
 		
 		var controller = Substitute.For<EnemyController>();
-		controller.SetMoveController(move);
-		controller.SetAttackController(attack);
+		controller.SetMoveComponent(move);
+		controller.SetAttackComponent(attack);
 		
 		return controller;
 	}

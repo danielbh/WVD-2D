@@ -3,7 +3,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour, IRangedController, IMoveController {
+public class Player : MonoBehaviour, IRangedComponent, IMoveComponent {
 
 	[HideInInspector]
 	public PlayerController controller;
@@ -21,8 +21,8 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 	
 	// Use this for initialization
 	public void OnEnable () {
-		controller.SetAttackController (this);
-		controller.SetMoveController (this);
+		controller.SetAttackComponent (this);
+		controller.SetMoveComponent (this);
 		fireAimJoystick.FingerTouchedEvent += StartAttacking;
 		fireAimJoystick.FingerLiftedEvent += StopAttacking;
 	}
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 		}
 	}
 
-	#region IFireController implementation
+	#region IFireComponent implementation
 
 	public void StartAttacking() {
 		StartCoroutine ("AttackSequence"); 
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour, IRangedController, IMoveController {
 
 	#endregion
 	
-	#region IMoveController implementation
+	#region IMoveComponent implementation
 
 	public void FaceDirection(Quaternion newDirection) { 
 		arrow.transform.rotation = newDirection;

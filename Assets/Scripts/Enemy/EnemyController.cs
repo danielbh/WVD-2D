@@ -4,13 +4,13 @@ using System;
 [Serializable]
 public class EnemyController : HumanoidController {
 
-	public IMeleeController attackController;
+	public IMeleeComponent attackComponent;
 	public bool attacking = false;
 
 	protected float attackCoolDownTime = 0;
 	
-	public void SetAttackController (IMeleeController controller) {
-		attackController = controller;
+	public void SetAttackComponent (IMeleeComponent component) {
+		attackComponent = component;
 	}
 
 
@@ -18,14 +18,14 @@ public class EnemyController : HumanoidController {
 		if (Vector3.Distance(currentPos, target) > 1) {
 			if (attacking == true) {
 				attacking = false;
-				attackController.StopAttacking();			
+				attackComponent.StopAttacking();			
 			}
 			return base.Move(currentPos, target, moveSpeed); 
 		}
 
 		if (attacking == false) {
 			attacking = true;
-			attackController.StartAttacking();
+			attackComponent.StartAttacking();
 
 		} 
 		return currentPos;
@@ -41,7 +41,7 @@ public class EnemyController : HumanoidController {
 
 	public void AttemptHit(float coolDownPeriodInSeconds) {
 		if (IsAttackReady()) {
-			attackController.Attack();
+			attackComponent.Attack();
 			attackCoolDownTime = CalcAttackCoolDown(coolDownPeriodInSeconds);
 		} 
 	}

@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class EnemyMelee : Enemy, IMeleeController {
+public class EnemyMelee : Enemy, IMeleeComponent {
 
 	override public void OnEnable() {
 		base.OnEnable();
-		controller.SetAttackController(this);
+		controller.SetAttackComponent(this);
 	}
 
-	#region IEnemyMeleeController implementation
+	#region IEnemyMeleeComponent implementation
 	public void Attack() {
 		player.GetComponent<HitPoints>().Hit(attackDamage);
 	}

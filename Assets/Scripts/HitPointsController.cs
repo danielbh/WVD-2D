@@ -12,7 +12,7 @@ public class HitPointsController  {
 
 	public void ReduceHitPoints (int damage, int currentHP) {
 		if (damage >= currentHP) {
-			hpComponent.Destroy();
+			hpComponent.Kill();
 		} else {
 			hpComponent.ReduceHitPoints(damage);
 		}

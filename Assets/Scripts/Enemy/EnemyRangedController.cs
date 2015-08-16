@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 [Serializable]
 public class EnemyRangedController : EnemyController {
 
-	public IRangedController rangedAttackController;
+	public IRangedComponent rangedAttackComponent;
 
-	public void SetAttackController (IRangedController controller) {
-		rangedAttackController = controller;
+	public void SetAttackComponent (IRangedComponent component) {
+		rangedAttackComponent = component;
 	}
 
 
@@ -15,14 +15,14 @@ public class EnemyRangedController : EnemyController {
 		if (Vector3.Distance(currentPos, target) > 1) {
 			if (attacking == true) {
 				attacking = false;
-				rangedAttackController.StopAttacking();			
+				rangedAttackComponent.StopAttacking();			
 			}
 			return base.Move(currentPos, target, moveSpeed); 
 		}
 		
 		if (attacking == false) {
 			attacking = true;
-			rangedAttackController.StartAttacking();
+			rangedAttackComponent.StartAttacking();
 		} 
 		return currentPos;
 	}
@@ -43,7 +43,7 @@ public class EnemyRangedController : EnemyController {
 
 	public new void AttemptHit(float coolDownPeriodInSeconds) {
 		if (IsAttackReady()) {
-			rangedAttackController.Attack(Vector3.right);
+			rangedAttackComponent.Attack(Vector3.right);
 			attackCoolDownTime = CalcAttackCoolDown(coolDownPeriodInSeconds);
 		} 
 	}

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -27,7 +27,7 @@ public class HitPointsTests  {
 		controller.ReduceHitPoints (25,25);
 		
 		component.DidNotReceive().ReduceHitPoints(25);
-		component.Received(1).Destroy();
+		component.Received(1).Kill();
 	}
 
 	public IHitPointsComponent GetHitPointsMock () {

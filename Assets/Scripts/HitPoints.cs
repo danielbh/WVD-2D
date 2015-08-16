@@ -6,22 +6,24 @@ public class HitPoints :   MonoBehaviour, IHitPointsComponent {
 	[HideInInspector]
 	public HitPointsController controller;
 	public GameObject damageTakenSprite;
-	public int maxHitPoints = 100;
-	public int hitPoints;
+	public int hitPoints = 100;
+	public bool invulnerable = false;
 
 	public void OnEnable() {
 		controller.SetComponent(this);
-		hitPoints = maxHitPoints;
 	}
 
-	#region IHitPontsComponent implementation
+	#region IHitPointsComponent implementation
 
 	public void Hit(int damage) {
 		AnimateHit();
-		controller.ReduceHitPoints(damage, hitPoints);
+		if (invulnerable == false) {
+			controller.ReduceHitPoints(damage, hitPoints);
+		}
 	}
 
-	public void Destroy() { Destroy (gameObject); }
+	// TODO: Add death triggers game over for player
+	public void Kill() { Destroy (gameObject); }
 
 	#endregion
 

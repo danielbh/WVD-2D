@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
 
-public interface IMeleeController: IAttackController {
+public interface IMeleeComponent: IAttackComponent {
 	void Attack();
 }
