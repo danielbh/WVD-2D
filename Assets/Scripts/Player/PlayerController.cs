@@ -16,8 +16,6 @@ public class PlayerController: HumanoidController {
 
 		var direction = GetFireAimAxes();
 
-		direction.Normalize();
-
 		if (!FireAimJoystickNeutral()) { 
 			// FIXME: Turns choppy needs to be made smooth. I feel like some of these arguments not neccesary.
 			FaceDirection(direction, oldFireDirection, turnSpeed); 

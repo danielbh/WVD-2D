@@ -45,10 +45,12 @@ public class EnemyController : HumanoidController {
 		}
 	}
 
+	// If the distance between currentPos and target are more than units.
 	private bool DistanceGreaterThan(float units, Vector3 currentPos, Vector3 target) {
 		return Vector3.Distance(currentPos, target) > units;
 	}
 
+	// If the distance between currentPos and target are less than units.
 	private bool DistanceLessThan(float units, Vector3 currentPos, Vector3 target) {
 		return Vector3.Distance(currentPos, target) < units;
 	}

@@ -15,8 +15,7 @@ public class EnemyRanged : Enemy, IRangedComponent {
 		beam.Fire(direction);
 	}
 	public Vector3 Aim() {
-		Vector3 target = player.transform.position;
-		target.Normalize();
+		Vector3 target = (player.transform.position - transform.position).normalized;
 		return target;
 	}
 }
