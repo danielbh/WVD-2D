@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IRangedComponent, IMoveComponent {
 	public GameObject arrow;
 	
 	public Projectile projectile;
-	public float firingRate= 0.2f;
+	public float timeBetweenAttacks= 0.2f;
 	public float turnSpeed = 50;
 	public float moveSpeed= 2 ;
 	public bool movementAcceleration = false; // The intensity of joystick increases the speed at which the wizard moves
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, IRangedComponent, IMoveComponent {
 		
 		for (;;) {
 			controller.ApplyFire(arrow.transform.rotation, turnSpeed);
-			yield return new WaitForSeconds(firingRate);
+			yield return new WaitForSeconds(timeBetweenAttacks);
 		}
 	}
 
@@ -87,4 +87,8 @@ public class Player : MonoBehaviour, IRangedComponent, IMoveComponent {
 	}
 
 	#endregion	
+
+	public void CastConcussiveBlast() {
+		Debug.Log ("Concussive Blast casted");
+	}
 }

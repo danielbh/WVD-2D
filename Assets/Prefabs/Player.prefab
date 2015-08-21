@@ -136,10 +136,10 @@ MonoBehaviour:
   staff: {fileID: 131250}
   arrow: {fileID: 132630}
   projectile: {fileID: 11432854, guid: a2892a49f1b80fb45bec1c41e373075c, type: 2}
-  firingRate: .200000003
+  timeBetweenAttacks: .5
   turnSpeed: 100
   moveSpeed: 2
-  movementAcceleration: 1
+  movementAcceleration: 0
 --- !u!114 &11417040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,6 +221,22 @@ Prefab:
       propertyPath: damageTakenSprite
       value: 
       objectReference: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementAcceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: firingRate
+      value: .100000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: timeBetweenAttacks
+      value: .5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101780}
