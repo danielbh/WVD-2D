@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 public class CastBar: MonoBehaviour {
 
-	public Player player;
+	public SpellBook spellBook;
 
 	private const string concussiveBlast = "Concussive Blast";
 	private const string frostNova = "Frost Nova";
@@ -25,7 +25,7 @@ public class CastBar: MonoBehaviour {
 					switch(collider.name) {
 					case concussiveBlast: 
 						AnimateSpellButton(collider.gameObject);
-						player.CastConcussiveBlast();
+						spellBook.CastConcussiveBlast();
 						break;
 					case frostNova: 
 						Debug.Log (frostNova);

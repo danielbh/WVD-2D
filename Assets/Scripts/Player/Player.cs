@@ -86,9 +86,5 @@ public class Player : MonoBehaviour, IRangedComponent, IMoveComponent {
 		return Vector3.MoveTowards (currentPos, target, moveSpeed);
 	}
 
-	#endregion	
-
-	public void CastConcussiveBlast() {
-		Debug.Log ("Concussive Blast casted");
-	}
+	#endregion		
 }

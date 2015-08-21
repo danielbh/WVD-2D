@@ -13,6 +13,7 @@ GameObject:
   - 114: {fileID: 11417040}
   - 50: {fileID: 5076530}
   - 61: {fileID: 6169878}
+  - 114: {fileID: 11479234}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -152,8 +153,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTakenSprite: {fileID: 167822, guid: 67f13cd2d5e70e641bcf58f9ced30a36, type: 2}
-  hitPoints: 0
+  hitPoints: 100
   invulnerable: 1
+--- !u!114 &11479234
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99f95ba0caa8044683fb37815441094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  concussiveBlast: {fileID: 139952, guid: d6b1da8a7ad61124391add84da33e20c, type: 2}
 --- !u!212 &21224122
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -237,6 +250,10 @@ Prefab:
       propertyPath: timeBetweenAttacks
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: concussiveBlast
+      value: 
+      objectReference: {fileID: 139952, guid: d6b1da8a7ad61124391add84da33e20c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101780}
